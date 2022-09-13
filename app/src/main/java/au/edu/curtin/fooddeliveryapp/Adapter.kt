@@ -16,8 +16,8 @@ class Adapter (private val data : ArrayList<Restaurant>) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = data[position]
+        holder.foodImage.setImageResource(currentItem.logo)
         holder.restaurantName.text = currentItem.name
-        holder.logoBtn.setImageResource(currentItem.logo)
     }
 
     override fun getItemCount(): Int {

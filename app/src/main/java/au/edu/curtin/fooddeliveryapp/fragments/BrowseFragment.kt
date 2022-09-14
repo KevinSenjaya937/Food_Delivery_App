@@ -1,4 +1,4 @@
-package au.edu.curtin.fooddeliveryapp
+package au.edu.curtin.fooddeliveryapp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import au.edu.curtin.fooddeliveryapp.R
+import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 
 
-
-class RestaurantsFragment(private val data : ArrayList<Restaurant>) : Fragment() {
+class BrowseFragment(private val data : ArrayList<Restaurant>) : Fragment() {
 
     private lateinit var adapter: Adapter
     private lateinit var recyclerView: RecyclerView
@@ -21,7 +22,7 @@ class RestaurantsFragment(private val data : ArrayList<Restaurant>) : Fragment()
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_restaurants, container, false)
+        val view = inflater.inflate(R.layout.fragment_browse, container, false)
         val rv = view.findViewById<RecyclerView>(R.id.restaurant_recycler)
         rv.layoutManager = LinearLayoutManager(context)
         rv.adapter = Adapter(data)

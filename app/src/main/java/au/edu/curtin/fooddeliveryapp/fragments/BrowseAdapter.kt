@@ -1,9 +1,11 @@
-package au.edu.curtin.fooddeliveryapp
+package au.edu.curtin.fooddeliveryapp.fragments
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import au.edu.curtin.fooddeliveryapp.R
+import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 
 class Adapter (private val data : ArrayList<Restaurant>) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -16,8 +18,7 @@ class Adapter (private val data : ArrayList<Restaurant>) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = data[position]
-        holder.foodImage.setImageResource(currentItem.logo)
-        holder.restaurantName.text = currentItem.name
+        holder.bind(currentItem)
     }
 
     override fun getItemCount(): Int {

@@ -1,13 +1,11 @@
 package au.edu.curtin.fooddeliveryapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import au.edu.curtin.fooddeliveryapp.classes.Restaurant
-import au.edu.curtin.fooddeliveryapp.fragments.AccountFragment
-import au.edu.curtin.fooddeliveryapp.fragments.BrowseFragment
-import au.edu.curtin.fooddeliveryapp.fragments.CartFragment
-import au.edu.curtin.fooddeliveryapp.fragments.HomeFragment
+import au.edu.curtin.fooddeliveryapp.fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -15,17 +13,19 @@ class MainActivity : AppCompatActivity() {
     val data = ArrayList<Restaurant>()
 
     fun importData() {
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("kfc", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +62,8 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
 
     private fun setCurrentFragment(Fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {

@@ -1,5 +1,7 @@
 package au.edu.curtin.fooddeliveryapp
 
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,19 +15,7 @@ class MainActivity : AppCompatActivity() {
     val data = ArrayList<Restaurant>()
 
     fun importData() {
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
-        data.add(Restaurant("KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val cartFragment = CartFragment()
         val acctFragment = AccountFragment()
         val restaurantsFragment = BrowseFragment(data)
-
+        val image = BitmapFactory.decodeResource(resources, R.drawable.kfc_logo)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
         setCurrentFragment(homeFragment)

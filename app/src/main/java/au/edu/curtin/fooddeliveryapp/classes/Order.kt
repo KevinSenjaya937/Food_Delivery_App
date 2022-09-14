@@ -11,5 +11,5 @@ data class Order (
     var time: Time,
     var date: Date,
     var restaurant: Restaurant,
-    var orderedItems: ArrayList<Food>
+    var userID: Int
 )

@@ -1,5 +1,10 @@
 package au.edu.curtin.fooddeliveryapp.fragments
 
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +17,7 @@ import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 
 class BrowseAdapter (private val data : ArrayList<Restaurant>,
                      private val listener: OnItemClickListener
-                     ) : RecyclerView.Adapter<BrowseAdapter.RestaurantViewHolder>() {
-
+                     ): RecyclerView.Adapter<BrowseAdapter.RestaurantViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -32,18 +36,20 @@ class BrowseAdapter (private val data : ArrayList<Restaurant>,
 
 
 
+
+    // RestaurantViewHolder //
     inner class RestaurantViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-        var restaurant: Restaurant? = null
-        var foodImage: ImageView
+        private lateinit var restaurant: Restaurant
+        var logoImage: ImageView
         var restaurantName: TextView
         var foodType: TextView
         var location: TextView
 
         init {
-            foodImage = itemView.findViewById(R.id.foodImageView)
+            logoImage = itemView.findViewById(R.id.logoImageView)
             restaurantName = itemView.findViewById(R.id.restaurantNameText)
-            foodType = itemView.findViewById(R.id.foodTypeText)
+            foodType = itemView.findViewById(R.id.restaurantTypeText)
             location = itemView.findViewById(R.id.locationText)
             itemView.setOnClickListener(this)
         }
@@ -57,7 +63,7 @@ class BrowseAdapter (private val data : ArrayList<Restaurant>,
 
         fun bind(restaurant: Restaurant) {
             this.restaurant = restaurant
-            foodImage.setImageResource(restaurant.logo)
+            logoImage.setImageResource(restaurant.logo)
             restaurantName.text = restaurant.name
             foodType.text = restaurant.foodType
             location.text = restaurant.location

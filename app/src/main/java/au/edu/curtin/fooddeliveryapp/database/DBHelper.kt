@@ -10,7 +10,7 @@ import au.edu.curtin.fooddeliveryapp.classes.Food
 import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 import java.lang.Exception
 
-class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         const val DATABASE_NAME = "restaurants.db"
@@ -21,7 +21,7 @@ class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         const val ID = "id"
         const val NAME = "name"
 
-        const val FOOD_TYPE = "food type"
+        const val FOOD_TYPE = "type"
         const val LOCATION = "location"
         const val LOGO = "logo"
 
@@ -31,10 +31,10 @@ class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val createRestaurantTable = ("CREATE TABLE $RESTAURANT_TABLE ($ID INTEGER PRIMARY KEY, $NAME TEXT,$FOOD_TYPE TEXT,$LOCATION TEXT,$LOGO BLOB)")
-        val createFoodTable = ("CREATE TABLE $FOOD_TABLE ($ID INTEGER PRIMARY KEY, $NAME TEXT,$PRICE INTEGER,$DESCRIPTION TEXT,$PICTURE BLOB)")
-        db!!.execSQL(createRestaurantTable)
-        db!!.execSQL(createFoodTable)
+        val createRestaurantTable = ("CREATE TABLE $RESTAURANT_TABLE ($ID INTEGER PRIMARY KEY, $NAME TEXT, $FOOD_TYPE TEXT, $LOCATION TEXT, $LOGO INTEGER)")
+        val createFoodTable = ("CREATE TABLE $FOOD_TABLE ($ID INTEGER PRIMARY KEY, $NAME TEXT, $PRICE INTEGER, $DESCRIPTION TEXT, $PICTURE INTEGER)")
+        db?.execSQL(createRestaurantTable)
+        db?.execSQL(createFoodTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
@@ -42,6 +42,8 @@ class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         db!!.execSQL(dropDB)
         onCreate(db)
     }
+
+
 
     fun insertRestaurant(restaurant: Restaurant) {
         val db = this.writableDatabase
@@ -54,7 +56,6 @@ class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         contentValues.put(LOGO, restaurant.logo)
 
         db.insert(RESTAURANT_TABLE, null, contentValues)
-        db.close()
     }
 
     fun insertFood(food: Food) {
@@ -64,8 +65,8 @@ class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         contentValues.put(ID, food.id)
         contentValues.put(NAME, food.name)
         contentValues.put(PRICE, food.price)
-        contentValues.put(LOCATION, food.description)
-        contentValues.put(LOGO, food.picture)
+        contentValues.put(DESCRIPTION, food.description)
+        contentValues.put(PICTURE, food.picture)
 
         db.insert(FOOD_TABLE, null, contentValues)
         db.close()
@@ -92,7 +93,7 @@ class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         var name: String
         var foodType: String
         var location: String
-        var logo: ByteArray
+        var logo: Int
 
         if (cursor.moveToFirst()) {
             do {
@@ -100,7 +101,7 @@ class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
                 name = cursor.getString(cursor.getColumnIndex(NAME))
                 foodType = cursor.getString(cursor.getColumnIndex(FOOD_TYPE))
                 location = cursor.getString(cursor.getColumnIndex(LOCATION))
-                logo = cursor.getBlob(cursor.getColumnIndex(LOGO))
+                logo = cursor.getInt(cursor.getColumnIndex(LOGO))
 
                 val restaurant = Restaurant(id, name, foodType, location, logo)
                 restaurantList.add(restaurant)
@@ -130,7 +131,7 @@ class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         var name: String
         var price: Int
         var description: String
-        var picture: ByteArray
+        var picture: Int
 
         if (cursor.moveToFirst()) {
             do {
@@ -138,7 +139,7 @@ class RestaurantDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
                 name = cursor.getString(cursor.getColumnIndex(NAME))
                 price = cursor.getInt(cursor.getColumnIndex(PRICE))
                 description = cursor.getString(cursor.getColumnIndex(DESCRIPTION))
-                picture = cursor.getBlob(cursor.getColumnIndex(PICTURE))
+                picture = cursor.getInt(cursor.getColumnIndex(PICTURE))
 
                 val food = Food(id, name, price, description, picture)
                 foodList.add(food)

@@ -10,43 +10,49 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Restaurant
+import au.edu.curtin.fooddeliveryapp.controller.FoodController
+import au.edu.curtin.fooddeliveryapp.controller.RestaurantController
 
 
-class BrowseFragment(private val data : ArrayList<Restaurant>) : Fragment(), BrowseAdapter.OnItemClickListener {
+class BrowseFragment(private val controller : RestaurantController, private val foodController: FoodController) : Fragment(), BrowseAdapter.OnItemClickListener {
 
     private lateinit var adapter: BrowseAdapter
     private lateinit var recyclerView: RecyclerView
-    private  lateinit var restaurantList: ArrayList<Restaurant>
+    private lateinit var restaurantList: ArrayList<Restaurant>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        controller.load()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_browse, container, false)
-        val rv = view.findViewById<RecyclerView>(R.id.restaurant_recycler)
-        rv.layoutManager = LinearLayoutManager(context)
-        rv.adapter = BrowseAdapter(data, this)
-        return view
+        return inflater.inflate(R.layout.fragment_restaurants, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        this.restaurantList = controller.getList()
         val layoutManager = LinearLayoutManager(context)
+
         recyclerView = view.findViewById(R.id.restaurant_recycler)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        adapter = BrowseAdapter(data,this)
+        adapter = BrowseAdapter(restaurantList,this)
         recyclerView.adapter = adapter
     }
 
     override fun onItemClick(position: Int) {
         Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
-        val clickedItem = data[position]
+        val clickedItem = restaurantList[position]
         clickedItem.name = "Clicked"
         adapter.notifyItemChanged(position)
         parentFragmentManager.beginTransaction().apply {
-            replace(R.id.scrollingFragment, AccountFragment())
+            replace(R.id.scrollingFragment, FoodListFragment(foodController))
             commit()
         }
     }

@@ -5,7 +5,7 @@ data class Food (
     var name: String,
     var price: Int,
     var description: String,
-    var picture: ByteArray
+    var picture: Int
 )
 
 

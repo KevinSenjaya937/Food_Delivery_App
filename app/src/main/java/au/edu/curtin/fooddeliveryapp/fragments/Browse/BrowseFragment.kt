@@ -1,4 +1,4 @@
-package au.edu.curtin.fooddeliveryapp.fragments
+package au.edu.curtin.fooddeliveryapp.fragments.Browse
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,9 @@ import au.edu.curtin.fooddeliveryapp.controller.FoodController
 import au.edu.curtin.fooddeliveryapp.controller.RestaurantController
 
 
-class BrowseFragment(private val controller : RestaurantController, private val foodController: FoodController) : Fragment(), BrowseAdapter.OnItemClickListener {
+class BrowseFragment(private val controller : RestaurantController,
+                     private val foodController: FoodController,
+                     ) : Fragment(), BrowseAdapter.OnItemClickListener {
 
     private lateinit var adapter: BrowseAdapter
     private lateinit var recyclerView: RecyclerView
@@ -52,7 +54,7 @@ class BrowseFragment(private val controller : RestaurantController, private val 
         clickedItem.name = "Clicked"
         adapter.notifyItemChanged(position)
         parentFragmentManager.beginTransaction().apply {
-            replace(R.id.scrollingFragment, FoodListFragment(foodController))
+            replace(R.id.scrollingFragment, FoodListFragment(foodController, clickedItem.id))
             commit()
         }
     }

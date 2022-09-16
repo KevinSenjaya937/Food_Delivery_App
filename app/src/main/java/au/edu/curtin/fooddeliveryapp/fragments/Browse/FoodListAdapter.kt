@@ -1,4 +1,4 @@
-package au.edu.curtin.fooddeliveryapp.fragments
+package au.edu.curtin.fooddeliveryapp.fragments.Browse
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Food
 
-class FoodAdapter (private val data: ArrayList<Food>,
-                   private val listener: OnItemClickListener
-                   ): RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
+class FoodListAdapter (private val data: ArrayList<Food>,
+                       private val listener: OnItemClickListener
+                   ): RecyclerView.Adapter<FoodListAdapter.FoodViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -43,6 +43,8 @@ class FoodAdapter (private val data: ArrayList<Food>,
         var addButton: ImageButton
         var amountText: TextView
         var removeBtn: ImageButton
+        var addToOrderBtn: ImageButton
+
 
         init {
             foodImage = itemView.findViewById(R.id.foodImageView)
@@ -52,9 +54,11 @@ class FoodAdapter (private val data: ArrayList<Food>,
             addButton = itemView.findViewById(R.id.addBtn)
             amountText = itemView.findViewById(R.id.amountTextNumber)
             removeBtn = itemView.findViewById(R.id.removeBtn)
+            addToOrderBtn = itemView.findViewById(R.id.addToOrderBtn)
 
             addButton.setOnClickListener(this)
             removeBtn.setOnClickListener(this)
+            addToOrderBtn.setOnClickListener(this)
         }
 
 
@@ -76,15 +80,18 @@ class FoodAdapter (private val data: ArrayList<Food>,
                 val new = amount + 1
                 listener.onAddItemClick(position, amount)
                 amountText.text = (new).toString()
-            } else {
+
+            } else if (view?.id == removeBtn.id){
+
                 val new = amount - 1
                 listener.onRemoveItemClick(position, amount)
                 if (new >= 0) {
                     amountText.text = (new).toString()
                 }
+            } else {
+                listener.onAddItemToOrderClick(position, amount)
             }
         }
-
     }
 
     interface OnItemClickListener {

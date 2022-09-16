@@ -1,27 +1,33 @@
-package au.edu.curtin.fooddeliveryapp.fragments
+package au.edu.curtin.fooddeliveryapp.fragments.Browse
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import au.edu.curtin.fooddeliveryapp.MainActivity
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Food
+import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
 import au.edu.curtin.fooddeliveryapp.controller.FoodController
+import au.edu.curtin.fooddeliveryapp.fragments.Browse.FoodListAdapter
 
 
-class FoodListFragment(private val controller: FoodController): Fragment(), FoodAdapter.OnItemClickListener {
+class FoodListFragment(private val controller: FoodController, private val restaurantID: Int): Fragment(), FoodListAdapter.OnItemClickListener {
 
-    private lateinit var adapter: FoodAdapter
+    private lateinit var adapter: FoodListAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var foodList: ArrayList<Food>
+    private var orderAmount = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         controller.load()
+
     }
 
     override fun onCreateView(
@@ -41,7 +47,7 @@ class FoodListFragment(private val controller: FoodController): Fragment(), Food
         recyclerView = view.findViewById(R.id.food_recycler)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        adapter = FoodAdapter(foodList, this)
+        adapter = FoodListAdapter(foodList, this)
         recyclerView.adapter = adapter
     }
 
@@ -54,6 +60,18 @@ class FoodListFragment(private val controller: FoodController): Fragment(), Food
     }
 
     override fun onAddItemToOrderClick(position: Int, amount: Int) {
-        TODO("Not yet implemented")
+        Log.d("EMPTY", "Add to OrderList")
+        val food = foodList[position]
+
+        var orderNumber = controller.getLastOrderID()
+        val foodID = food.id
+        val totalPrice = food.price * amount
+
+        if (amount == 0) {
+            Toast.makeText(context, "Amount cannot be 0", Toast.LENGTH_SHORT).show()
+        } else {
+            (activity as MainActivity).badgeSetup(R.id.nav_cart, orderAmount++)
+            controller.addFoodOrder(FoodOrder(orderNumber++, restaurantID, foodID, amount, totalPrice))
+        }
     }
 }

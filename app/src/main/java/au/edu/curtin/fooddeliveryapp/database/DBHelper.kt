@@ -56,7 +56,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     override fun onCreate(db: SQLiteDatabase?) {
         val createRestaurantTable = ("CREATE TABLE $RESTAURANT_TABLE ($ID INTEGER PRIMARY KEY, $NAME TEXT, $FOOD_TYPE TEXT, $LOCATION TEXT, $LOGO INTEGER)")
         val createFoodTable = ("CREATE TABLE $FOOD_TABLE ($ID INTEGER PRIMARY KEY, $NAME TEXT, $PRICE INTEGER, $DESCRIPTION TEXT, $PICTURE INTEGER)")
-        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($ORDER_NUMBER INTEGER PRIMARY KEY, $FOOD_ID INTEGER, $AMOUNT INTEGER, $TOTAL_PRICE INTEGER)")
+        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($ORDER_NUMBER INTEGER PRIMARY KEY, $RESTAURANT INTEGER, $FOOD_ID INTEGER, $AMOUNT INTEGER, $TOTAL_PRICE INTEGER)")
         val createOrdersTable = ("CREATE TABLE $ORDERS_TABLE ($ORDER_NUMBER INTEGER PRIMARY KEY, $TOTAL_PRICE INTEGER, $TIME TEXT, $DATE TEXT, $RESTAURANT INTEGER, $USER INTEGER)")
         val createUsersTable = ("CREATE TABLE $USERS_TABLE ($USER INTEGER PRIMARY KEY, $FIRST_NAME TEXT, $LAST_NAME TEXT, $EMAIL TEXT, $PASSWORD TEXT)")
         db?.execSQL(createRestaurantTable)
@@ -222,10 +222,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     }
 
     @SuppressLint("Range")
-    fun getAllFoodOrders() : ArrayList<FoodOrder> {
+    fun getAllFoodOrders(orderNumber: Int) : ArrayList<FoodOrder> {
 
         val foodOrderList: ArrayList<FoodOrder> = ArrayList()
-        val selectQuery = "SELECT * FROM $FOOD_ORDER_TABLE"
+        val selectQuery = "SELECT * FROM $FOOD_ORDER_TABLE WHERE $ORDER_NUMBER LIKE $orderNumber"
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -239,6 +239,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
 
         var orderNumber: Int
+        var restaurantID: Int
         var foodID: Int
         var amount: Int
         var totalPrice: Int
@@ -246,15 +247,33 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         if (cursor.moveToFirst()) {
             do {
                 orderNumber = cursor.getInt(cursor.getColumnIndex(ORDER_NUMBER))
+                restaurantID = cursor.getInt(cursor.getColumnIndex(RESTAURANT))
                 foodID = cursor.getInt(cursor.getColumnIndex(FOOD_ID))
                 amount = cursor.getInt(cursor.getColumnIndex(AMOUNT))
                 totalPrice = cursor.getInt(cursor.getColumnIndex(TOTAL_PRICE))
 
-                val foodOrder = FoodOrder(orderNumber, foodID, amount, totalPrice)
+                val foodOrder = FoodOrder(orderNumber, restaurantID, foodID, amount, totalPrice)
                 foodOrderList.add(foodOrder)
             } while (cursor.moveToNext())
         }
         return foodOrderList
+    }
+
+    @SuppressLint("Range")
+    fun getLastOrderId(): Int {
+        val selectQuery = "SELECT * FROM $ORDERS_TABLE"
+        val db = this.readableDatabase
+
+        val cursor: Cursor? = db.rawQuery(selectQuery, null)
+
+        var orderID : Int = -1
+
+        if (cursor != null) {
+            if (cursor.moveToLast()) {
+                orderID = cursor.getInt(cursor.getColumnIndex(ORDER_NUMBER))
+            }
+        }
+        return orderID
     }
 
     @SuppressLint("Range")
@@ -296,6 +315,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
         return orderList
     }
+
+
 
     @SuppressLint("Range")
     fun getUser(email: String, password: String): User? {

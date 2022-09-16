@@ -6,12 +6,15 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Food
+import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
 import au.edu.curtin.fooddeliveryapp.database.DBHelper
 import java.io.ByteArrayOutputStream
 
 class FoodController(database: DBHelper) {
 
     private lateinit var foodList: ArrayList<Food>
+    private var foodOrderList = ArrayList<FoodOrder>()
+    private var orderNumber: Int = -1
     private var db = database
     private var id = 0
 
@@ -27,15 +30,32 @@ class FoodController(database: DBHelper) {
         }
     }
 
-    fun add(food: Food) {
-        db.insertFood(food)
+    fun getFoodOrders(): ArrayList<FoodOrder> {
+        return foodOrderList
     }
 
     fun getList(): ArrayList<Food> {
         return db.getAllFood()
     }
 
+    fun getFoodOrders(foodOrderID: Int): ArrayList<FoodOrder> {
+        return db.getAllFoodOrders(foodOrderID)
+    }
 
+    fun addFoodOrder(foodOrder: FoodOrder) {
+        foodOrder.orderNumber
+        foodOrderList.add(foodOrder)
+        db.insertFoodOrder(foodOrder)
+    }
+
+    fun getLastOrderID(): Int {
+        val lastOrderID = db.getLastOrderId()
+
+        if (lastOrderID == -1) {
+            return 1
+        }
+        return lastOrderID
+    }
 
     fun initializeDB(){
         foodList.add(Food(id++, "Fries", 4, "860kJ", R.drawable.fries_pic))

@@ -82,7 +82,6 @@ class FoodAdapter (private val data: ArrayList<Food>,
                 if (new >= 0) {
                     amountText.text = (new).toString()
                 }
-
             }
         }
 
@@ -91,5 +90,6 @@ class FoodAdapter (private val data: ArrayList<Food>,
     interface OnItemClickListener {
         fun onAddItemClick(position: Int, amount: Int)
         fun onRemoveItemClick(position: Int, amount: Int)
+        fun onAddItemToOrderClick(position: Int, amount: Int)
     }
 }

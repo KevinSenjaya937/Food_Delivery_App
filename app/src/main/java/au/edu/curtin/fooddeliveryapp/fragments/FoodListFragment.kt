@@ -52,4 +52,8 @@ class FoodListFragment(private val controller: FoodController): Fragment(), Food
     override fun onRemoveItemClick(position: Int, amount: Int) {
         Log.d("EMPTY", "Remove")
     }
+
+    override fun onAddItemToOrderClick(position: Int, amount: Int) {
+        TODO("Not yet implemented")
+    }
 }

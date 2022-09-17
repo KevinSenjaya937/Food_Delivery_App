@@ -54,7 +54,7 @@ class BrowseFragment(private val controller : RestaurantController,
         clickedItem.name = "Clicked"
         adapter.notifyItemChanged(position)
         parentFragmentManager.beginTransaction().apply {
-            replace(R.id.scrollingFragment, FoodListFragment(foodController, clickedItem.id))
+            replace(R.id.scrollingFragment, FoodListFragment(foodController, clickedItem.name))
             commit()
         }
     }

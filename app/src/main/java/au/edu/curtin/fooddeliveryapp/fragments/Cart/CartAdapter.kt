@@ -53,6 +53,13 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
 
         fun bind(foodOrder: FoodOrder) {
             this.foodOrder = foodOrder
+            val total = foodOrder.totalPrice.toString()
+
+            foodImage.setImageResource(foodOrder.foodPicture)
+            restaurantName.text = foodOrder.restaurantName
+            foodName.text = foodOrder.foodName
+            totalPrice.text = "$${total}.00"
+            amountText.text = foodOrder.amount.toString()
             // Stopped Here
         }
 

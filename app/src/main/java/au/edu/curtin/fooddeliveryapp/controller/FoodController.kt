@@ -45,7 +45,6 @@ class FoodController(database: DBHelper) {
     fun addFoodOrder(foodOrder: FoodOrder) {
         foodOrder.orderNumber
         foodOrderList.add(foodOrder)
-        db.insertFoodOrder(foodOrder)
     }
 
     fun getLastOrderID(): Int {

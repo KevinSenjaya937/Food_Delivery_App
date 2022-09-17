@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
+import au.edu.curtin.fooddeliveryapp.controller.FoodController
 import au.edu.curtin.fooddeliveryapp.controller.OrderController
 
 
-class CartFragment(private val controller: OrderController) : Fragment(), CartAdapter.OnItemClickListener {
+class CartFragment(private val controller: OrderController,
+                   private val foodController: FoodController) : Fragment(), CartAdapter.OnItemClickListener {
 
     private lateinit var adapter: CartAdapter
     private lateinit var recyclerView: RecyclerView
@@ -20,7 +22,7 @@ class CartFragment(private val controller: OrderController) : Fragment(), CartAd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        controller.load()
+//        controller.load()
     }
 
     override fun onCreateView(
@@ -34,7 +36,7 @@ class CartFragment(private val controller: OrderController) : Fragment(), CartAd
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        this.foodOrderList = controller.getList()
+        this.foodOrderList = foodController.getFoodOrders()
         val layoutManager = LinearLayoutManager(context)
 
         recyclerView = view.findViewById(R.id.cart_recycler)

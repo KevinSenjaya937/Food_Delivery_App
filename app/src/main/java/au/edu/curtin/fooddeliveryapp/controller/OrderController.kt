@@ -1,5 +1,6 @@
 package au.edu.curtin.fooddeliveryapp.controller
 
+import android.util.Log
 import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
 import au.edu.curtin.fooddeliveryapp.classes.Order
 import au.edu.curtin.fooddeliveryapp.database.DBHelper
@@ -15,7 +16,11 @@ class OrderController(database: DBHelper) {
     fun load() {
         this.currentOrderNumber = db.getLastOrderId()
         this.foodOrderList = getFoodOrders(currentOrderNumber)
-        this.foodOrderList.sortWith(compareBy { it.restaurantID })
+        this.foodOrderList.sortWith(compareBy { it.restaurantName })
+
+        for (foodOrder in foodOrderList) {
+            Log.d("EMPTY", foodOrder.foodName)
+        }
     }
 
     private fun calculateTotalCost(): Int {
@@ -32,6 +37,9 @@ class OrderController(database: DBHelper) {
     }
 
     fun getList(): ArrayList<FoodOrder> {
+        for (foodOrder in foodOrderList) {
+            Log.d("EMPTY", foodOrder.foodName)
+        }
         return this.foodOrderList
     }
 

@@ -35,8 +35,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val PICTURE = "picture"
 
         // Food Order Table
-        const val FOOD_ID = "foodID"
+        const val FOOD_NAME = "foodName"
         const val AMOUNT = "amount"
+        const val RESTAURANT_NAME = "restaurantName"
 
         // Orders Table
         const val ORDER_NUMBER = "id"
@@ -56,7 +57,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     override fun onCreate(db: SQLiteDatabase?) {
         val createRestaurantTable = ("CREATE TABLE $RESTAURANT_TABLE ($ID INTEGER PRIMARY KEY, $NAME TEXT, $FOOD_TYPE TEXT, $LOCATION TEXT, $LOGO INTEGER)")
         val createFoodTable = ("CREATE TABLE $FOOD_TABLE ($ID INTEGER PRIMARY KEY, $NAME TEXT, $PRICE INTEGER, $DESCRIPTION TEXT, $PICTURE INTEGER)")
-        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($ORDER_NUMBER INTEGER PRIMARY KEY, $RESTAURANT INTEGER, $FOOD_ID INTEGER, $AMOUNT INTEGER, $TOTAL_PRICE INTEGER)")
+        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($ORDER_NUMBER INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $AMOUNT INTEGER, $TOTAL_PRICE INTEGER, $PICTURE INTEGER)")
         val createOrdersTable = ("CREATE TABLE $ORDERS_TABLE ($ORDER_NUMBER INTEGER PRIMARY KEY, $TOTAL_PRICE INTEGER, $TIME TEXT, $DATE TEXT, $RESTAURANT INTEGER, $USER INTEGER)")
         val createUsersTable = ("CREATE TABLE $USERS_TABLE ($USER INTEGER PRIMARY KEY, $FIRST_NAME TEXT, $LAST_NAME TEXT, $EMAIL TEXT, $PASSWORD TEXT)")
         db?.execSQL(createRestaurantTable)
@@ -107,9 +108,11 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         val contentValues = ContentValues()
         contentValues.put(ORDER_NUMBER, foodOrder.orderNumber)
-        contentValues.put(FOOD_ID, foodOrder.foodID)
+        contentValues.put(RESTAURANT_NAME, foodOrder.restaurantName)
+        contentValues.put(FOOD_NAME, foodOrder.foodName)
         contentValues.put(AMOUNT, foodOrder.amount)
         contentValues.put(TOTAL_PRICE, foodOrder.totalPrice)
+        contentValues.put(PICTURE, foodOrder.foodPicture)
 
         db.insert(FOOD_ORDER_TABLE, null, contentValues)
         db.close()
@@ -239,20 +242,22 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
 
         var orderNumber: Int
-        var restaurantID: Int
-        var foodID: Int
+        var restaurantName: String
+        var foodName: String
         var amount: Int
         var totalPrice: Int
+        var foodPicture: Int
 
         if (cursor.moveToFirst()) {
             do {
                 orderNumber = cursor.getInt(cursor.getColumnIndex(ORDER_NUMBER))
-                restaurantID = cursor.getInt(cursor.getColumnIndex(RESTAURANT))
-                foodID = cursor.getInt(cursor.getColumnIndex(FOOD_ID))
+                restaurantName = cursor.getString(cursor.getColumnIndex(RESTAURANT_NAME))
+                foodName = cursor.getString(cursor.getColumnIndex(FOOD_NAME))
                 amount = cursor.getInt(cursor.getColumnIndex(AMOUNT))
                 totalPrice = cursor.getInt(cursor.getColumnIndex(TOTAL_PRICE))
+                foodPicture = cursor.getInt(cursor.getColumnIndex(PICTURE))
 
-                val foodOrder = FoodOrder(orderNumber, restaurantID, foodID, amount, totalPrice)
+                val foodOrder = FoodOrder(orderNumber, restaurantName, foodName, amount, totalPrice,  foodPicture)
                 foodOrderList.add(foodOrder)
             } while (cursor.moveToNext())
         }

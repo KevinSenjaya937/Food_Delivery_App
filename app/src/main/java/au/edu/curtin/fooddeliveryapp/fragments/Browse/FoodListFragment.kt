@@ -17,7 +17,7 @@ import au.edu.curtin.fooddeliveryapp.controller.FoodController
 import au.edu.curtin.fooddeliveryapp.fragments.Browse.FoodListAdapter
 
 
-class FoodListFragment(private val controller: FoodController, private val restaurantID: Int): Fragment(), FoodListAdapter.OnItemClickListener {
+class FoodListFragment(private val controller: FoodController, private val restaurantName: String): Fragment(), FoodListAdapter.OnItemClickListener {
 
     private lateinit var adapter: FoodListAdapter
     private lateinit var recyclerView: RecyclerView
@@ -64,14 +64,14 @@ class FoodListFragment(private val controller: FoodController, private val resta
         val food = foodList[position]
 
         var orderNumber = controller.getLastOrderID()
-        val foodID = food.id
+        val foodName = food.name
         val totalPrice = food.price * amount
 
         if (amount == 0) {
             Toast.makeText(context, "Amount cannot be 0", Toast.LENGTH_SHORT).show()
         } else {
             (activity as MainActivity).badgeSetup(R.id.nav_cart, orderAmount++)
-            controller.addFoodOrder(FoodOrder(orderNumber++, restaurantID, foodID, amount, totalPrice))
+            controller.addFoodOrder(FoodOrder(orderNumber+1, restaurantName, foodName, amount, totalPrice, food.picture))
         }
     }
 }

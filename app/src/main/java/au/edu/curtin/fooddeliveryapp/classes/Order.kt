@@ -8,6 +8,7 @@ import kotlin.collections.ArrayList
 data class Order (
     var orderID: Int,
     var restaurantName: String,
+    var restaurantID: Int,
     var amountOfItems: Int,
     var totalPrice: Int,
     var time: String,

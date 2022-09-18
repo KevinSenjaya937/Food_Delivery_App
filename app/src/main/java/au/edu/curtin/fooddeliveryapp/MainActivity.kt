@@ -10,6 +10,7 @@ import au.edu.curtin.fooddeliveryapp.controller.RestaurantController
 import au.edu.curtin.fooddeliveryapp.database.DBHelper
 import au.edu.curtin.fooddeliveryapp.fragments.Account.AccountFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Browse.BrowseFragment
+import au.edu.curtin.fooddeliveryapp.fragments.Cart.CartByRestaurantFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Cart.CartFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val homeFragment = HomeFragment()
         val cartFragment = CartFragment(orderController, foodController)
+        val cartByRestaurantFragment = CartByRestaurantFragment(foodController)
         val acctFragment = AccountFragment()
         val restaurantsFragment = BrowseFragment(restaurantController, foodController)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                     setCurrentFragment(restaurantsFragment)
                 }
                 R.id.nav_cart -> {
-                    setCurrentFragment(cartFragment)
+                    setCurrentFragment(cartByRestaurantFragment)
                     badgeClear(R.id.nav_cart)
                 }
                 R.id.nav_account -> {

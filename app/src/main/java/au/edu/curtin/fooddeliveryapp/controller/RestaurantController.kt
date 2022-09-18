@@ -1,6 +1,7 @@
 package au.edu.curtin.fooddeliveryapp.controller
 
 import android.content.Context
+import android.util.Log
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 import au.edu.curtin.fooddeliveryapp.database.DBHelper
@@ -13,8 +14,12 @@ class RestaurantController(database: DBHelper) {
 
     fun load() {
         this.restaurantList = getList()
+
         if (restaurantList.isEmpty()) {
             initializeDB()
+        }
+        for (restaurant in restaurantList) {
+            Log.d("EMPTY", "${restaurant.id} : ${restaurant.name}")
         }
     }
 
@@ -27,6 +32,7 @@ class RestaurantController(database: DBHelper) {
     }
 
     fun initializeDB() {
+        restaurantList = ArrayList()
         restaurantList.add(Restaurant(id++, "KFC", "Fast Food", "Bentley", R.drawable.kfc_logo))
         restaurantList.add(Restaurant(id++, "McDonald's", "Fast Food", "Cannington", R.drawable.mcdonalds_logo))
         restaurantList.add(Restaurant(id++, "Hungry Jack's", "Fast Food", "Bentley", R.drawable.hungry_jacks_logo))

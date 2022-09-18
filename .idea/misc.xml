@@ -25,12 +25,14 @@
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/drawable/circular_image.xml" value="0.5005" />
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/drawable/nav_item_colour_selected.xml" value="0.245" />
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/activity_main.xml" value="0.5020833333333333" />
-        <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/cart_item.xml" value="0.75" />
+        <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/cart_by_restaurant_item.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/cart_item.xml" value="0.5261437908496732" />
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/food_item.xml" value="0.5" />
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/fragment_account.xml" value="0.5020833333333333" />
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/fragment_browse.xml" value="0.5020833333333333" />
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/fragment_cart.xml" value="0.2822878228782288" />
-        <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/fragment_food.xml" value="0.1" />
+        <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/fragment_cart_by_restaurant.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/fragment_food.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/fragment_home.xml" value="0.5020833333333333" />
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/fragment_restaurants.xml" value="0.5020833333333333" />
         <entry key="..\:/Users/Kevin Senjaya/AndroidStudioProjects/Food_Delivery_App/app/src/main/res/layout/restaurant_item.xml" value="0.5020833333333333" />

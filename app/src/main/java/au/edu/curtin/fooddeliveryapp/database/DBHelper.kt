@@ -49,6 +49,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         // Orders Table
         const val ORDER_ID = "id"
         //RESTAURANT_NAME
+        //RESTAURANT_ID
         const val ORDER_ITEM_AMOUNT = "amountOfItems"
         const val TOTAL_PRICE = "totalPrice"
         const val TIME = "time"
@@ -69,7 +70,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         val createFoodTable = ("CREATE TABLE $FOOD_TABLE ($RESTAURANT_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_PRICE INTEGER, $FOOD_DESCRIPTION TEXT, $FOOD_PICTURE INTEGER)")
 
-        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($FOOD_ORDER_ID INTEGER PRIMARY KEY, $ORDER_ID INTEGER, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_ORDER_AMOUNT INTEGER, $TOTAL_FOOD_ORDER_PRICE INTEGER, $FOOD_PICTURE INTEGER)")
+        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($FOOD_ORDER_ID INTEGER PRIMARY KEY, $ORDER_ID INTEGER, $RESTAURANT_NAME TEXT, $RESTAURANT_ID INTEGER, $FOOD_NAME TEXT, $FOOD_ORDER_AMOUNT INTEGER, $TOTAL_FOOD_ORDER_PRICE INTEGER, $FOOD_PICTURE INTEGER)")
 
         val createOrdersTable = ("CREATE TABLE $ORDERS_TABLE ($ORDER_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $ORDER_ITEM_AMOUNT INTEGER, $TOTAL_PRICE INTEGER, $TIME TEXT, $DATE TEXT, $RESTAURANT_LOGO INTEGER, $USER_ID INTEGER)")
         val createUsersTable = ("CREATE TABLE $USERS_TABLE ($USER_ID INTEGER PRIMARY KEY, $FIRST_NAME TEXT, $LAST_NAME TEXT, $EMAIL TEXT, $PASSWORD TEXT)")
@@ -142,6 +143,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         val contentValues = ContentValues()
         contentValues.put(ORDER_ID, order.orderID)
         contentValues.put(RESTAURANT_NAME, order.restaurantName)
+        contentValues.put(RESTAURANT_ID, order.restaurantID)
         contentValues.put(TOTAL_PRICE, order.totalPrice)
         contentValues.put(TIME, order.time)
         contentValues.put(DATE, order.date)
@@ -306,6 +308,25 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
     // Checked
     @SuppressLint("Range")
+    fun getLastFoodOrderId(): Int {
+        val selectQuery = "SELECT * FROM $FOOD_ORDER_TABLE"
+        val db = this.readableDatabase
+
+        val cursor: Cursor? = db.rawQuery(selectQuery, null)
+
+        var foodOrderID : Int = -1
+
+        if (cursor != null) {
+            if (cursor.moveToLast()) {
+                foodOrderID = cursor.getInt(cursor.getColumnIndex(FOOD_ORDER_ID))
+            }
+        }
+        cursor?.close()
+        return foodOrderID
+    }
+
+    // Checked
+    @SuppressLint("Range")
     fun getAllFoodOrders(id: Int) : ArrayList<FoodOrder> {
 
         val foodOrderList: ArrayList<FoodOrder> = ArrayList()
@@ -360,7 +381,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         if (cursor != null) {
             if (cursor.moveToLast()) {
-                orderID = cursor.getInt(cursor.getColumnIndex(FOOD_ORDER_ID))
+                orderID = cursor.getInt(cursor.getColumnIndex(ORDER_ID))
             }
         }
         cursor?.close()
@@ -387,6 +408,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         var orderID: Int
         var restaurantName: String
+        var restaurantID: Int
         var amountOfItems: Int
         var totalPrice: Int
         var time: String
@@ -398,6 +420,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             do {
                 orderID = cursor.getInt(cursor.getColumnIndex(ORDER_ID))
                 restaurantName = cursor.getString(cursor.getColumnIndex(RESTAURANT_NAME))
+                restaurantID = cursor.getInt(cursor.getColumnIndex(RESTAURANT_ID))
                 amountOfItems = cursor.getInt(cursor.getColumnIndex(ORDER_ITEM_AMOUNT))
                 totalPrice = cursor.getInt(cursor.getColumnIndex(TOTAL_PRICE))
                 time = cursor.getString(cursor.getColumnIndex(TIME))
@@ -405,7 +428,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                 restaurantLogo = cursor.getInt(cursor.getColumnIndex(RESTAURANT_LOGO))
                 user = cursor.getInt(cursor.getColumnIndex(USER_ID))
 
-                val order = Order(orderID, restaurantName, amountOfItems, totalPrice, time, date, restaurantLogo, user)
+                val order = Order(orderID, restaurantName, restaurantID, amountOfItems, totalPrice, time, date, restaurantLogo, user)
                 orderList.add(order)
             } while (cursor.moveToNext())
         }

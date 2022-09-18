@@ -8,18 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
-import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
+import au.edu.curtin.fooddeliveryapp.classes.Order
 import au.edu.curtin.fooddeliveryapp.controller.FoodController
-import au.edu.curtin.fooddeliveryapp.controller.OrderController
 
+class CartByRestaurantFragment(private val controller: FoodController) : Fragment(), CartByRestaurantAdapter.OnItemClickListener {
 
-class CartFragment(private val controller: OrderController,
-                   private val foodController: FoodController
-                   ) : Fragment(), CartAdapter.OnItemClickListener {
-
-    private lateinit var adapter: CartAdapter
+    private lateinit var adapter: CartByRestaurantAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var foodOrderList: ArrayList<FoodOrder>
+    private lateinit var orderList: ArrayList<Order>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,34 +25,25 @@ class CartFragment(private val controller: OrderController,
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+        return inflater.inflate(R.layout.fragment_cart_by_restaurant, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        this.foodOrderList = foodController.getFoodOrders()
+        this.orderList = controller.getOrderList()
+
         val layoutManager = LinearLayoutManager(context)
 
-        recyclerView = view.findViewById(R.id.cart_recycler)
+        recyclerView = view.findViewById(R.id.cart_by_restaurant_recycler)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        adapter = CartAdapter(foodOrderList, this)
+        adapter = CartByRestaurantAdapter(orderList, controller,this)
         recyclerView.adapter = adapter
 
     }
-
-    override fun onAddItemClick(position: Int) {
+    override fun onItemClick(position: Int) {
         TODO("Not yet implemented")
     }
-
-    override fun onRemoveItemClick(position: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onRemoveItemFromCartClick(position: Int) {
-        TODO("Not yet implemented")
-    }
-
 
 }

@@ -75,21 +75,24 @@ class FoodListAdapter (private val data: ArrayList<Food>,
             val position: Int = absoluteAdapterPosition
             var amount = amountText.text.toString().toInt()
 
-
-            if (view?.id == addButton.id) {
-                val new = amount + 1
-                listener.onAddItemClick(position, amount)
-                amountText.text = (new).toString()
-
-            } else if (view?.id == removeBtn.id){
-
-                val new = amount - 1
-                listener.onRemoveItemClick(position, amount)
-                if (new >= 0) {
-                    amountText.text = (new).toString()
+            if(view != null) {
+                when (view.id) {
+                    R.id.addBtn -> {
+                        val new = amount + 1
+                        listener.onAddItemClick(position, amount)
+                        amountText.text = (new).toString()
+                    }
+                    R.id.removeBtn -> {
+                        val new = amount - 1
+                        listener.onRemoveItemClick(position, amount)
+                        if (new >= 0) {
+                            amountText.text = (new).toString()
+                        }
+                    }
+                    R.id.addToOrderBtn -> {
+                        listener.onAddItemToOrderClick(position, amount)
+                    }
                 }
-            } else {
-                listener.onAddItemToOrderClick(position, amount)
             }
         }
     }

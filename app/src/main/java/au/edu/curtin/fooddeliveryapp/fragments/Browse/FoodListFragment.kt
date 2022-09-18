@@ -63,15 +63,12 @@ class FoodListFragment(private val controller: FoodController, private val resta
         Log.d("EMPTY", "Add to OrderList")
         val food = foodList[position]
 
-        var orderNumber = controller.getLastOrderID()
-        val foodName = food.name
-        val totalPrice = food.price * amount
-
         if (amount == 0) {
             Toast.makeText(context, "Amount cannot be 0", Toast.LENGTH_SHORT).show()
         } else {
+            controller.createOrder()
+            controller.addFoodOrder(food, amount)
             (activity as MainActivity).badgeSetup(R.id.nav_cart, orderAmount++)
-            controller.addFoodOrder(FoodOrder(orderNumber+1, restaurantName, foodName, amount, totalPrice, food.picture))
         }
     }
 }

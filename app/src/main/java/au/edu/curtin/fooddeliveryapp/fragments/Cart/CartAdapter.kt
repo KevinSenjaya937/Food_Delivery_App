@@ -4,6 +4,7 @@ import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
@@ -12,7 +13,7 @@ import au.edu.curtin.fooddeliveryapp.fragments.Browse.BrowseAdapter
 import org.w3c.dom.Text
 
 class CartAdapter (private val data: ArrayList<FoodOrder>,
-                   private val listener: CartAdapter.OnItemClickListener
+                   private val listener: OnItemClickListener
                    ): RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -38,6 +39,9 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
         var foodName: TextView
         var totalPrice: TextView
         var amountText: TextView
+        var addButton: ImageButton
+        var removeButton: ImageButton
+        var removeFromCartButton: ImageButton
 
         init {
             foodImage = itemView.findViewById(R.id.foodImageView)
@@ -45,10 +49,30 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
             foodName = itemView.findViewById(R.id.foodNameText)
             totalPrice = itemView.findViewById(R.id.priceText)
             amountText = itemView.findViewById(R.id.amountTextNumber)
+            addButton = itemView.findViewById(R.id.addBtn)
+            removeButton = itemView.findViewById(R.id.removeBtn)
+            removeFromCartButton = itemView.findViewById(R.id.removeFromCartBtn)
+
+            addButton.setOnClickListener(this)
+            removeButton.setOnClickListener(this)
+            removeFromCartButton.setOnClickListener(this)
         }
 
-        override fun onClick(p0: View?) {
-            TODO("Not yet implemented")
+        override fun onClick(view: View?) {
+            if (view != null) {
+                when (view.id) {
+                    R.id.addBtn -> {
+
+                    }
+                    R.id.removeBtn -> {
+
+                    }
+                    R.id.removeFromCartBtn -> {
+
+                    }
+
+                }
+            }
         }
 
         fun bind(foodOrder: FoodOrder) {
@@ -60,13 +84,14 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
             foodName.text = foodOrder.foodName
             totalPrice.text = "$${total}.00"
             amountText.text = foodOrder.amount.toString()
-            // Stopped Here
         }
 
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onAddItemClick(position: Int)
+        fun onRemoveItemClick(position: Int)
+        fun onRemoveItemFromCartClick(position: Int)
     }
 
 

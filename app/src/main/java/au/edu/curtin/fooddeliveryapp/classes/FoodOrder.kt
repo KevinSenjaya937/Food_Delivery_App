@@ -1,7 +1,8 @@
 package au.edu.curtin.fooddeliveryapp.classes
 
 data class FoodOrder (
-    var orderNumber: Int,
+    var foodOrderID: Int,
+    var orderID: Int,
     var restaurantName: String,
     var foodName: String,
     var amount: Int,

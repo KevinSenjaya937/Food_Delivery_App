@@ -6,10 +6,12 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 data class Order (
-    var orderNumber: Int,
+    var orderID: Int,
+    var restaurantName: String,
+    var amountOfItems: Int,
     var totalPrice: Int,
     var time: String,
     var date: String,
-    var restaurantID: Int,
+    var restaurantLogo: Int,
     var userID: Int
 )

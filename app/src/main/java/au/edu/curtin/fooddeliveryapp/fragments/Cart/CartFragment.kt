@@ -47,8 +47,17 @@ class CartFragment(private val controller: OrderController,
 
     }
 
-    override fun onItemClick(position: Int) {
+    override fun onAddItemClick(position: Int) {
         TODO("Not yet implemented")
     }
+
+    override fun onRemoveItemClick(position: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onRemoveItemFromCartClick(position: Int) {
+        TODO("Not yet implemented")
+    }
+
 
 }

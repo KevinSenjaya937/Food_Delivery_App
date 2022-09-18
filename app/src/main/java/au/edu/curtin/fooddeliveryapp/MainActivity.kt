@@ -19,8 +19,9 @@ class MainActivity : AppCompatActivity() {
     val data = ArrayList<Restaurant>()
     private val database = DBHelper(this)
     private val restaurantController = RestaurantController(database)
-    private val foodController = FoodController(database)
     private val orderController = OrderController(database)
+    private val foodController = FoodController(database)
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

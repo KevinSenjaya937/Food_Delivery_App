@@ -5,12 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 import au.edu.curtin.fooddeliveryapp.controller.FoodController
-import au.edu.curtin.fooddeliveryapp.controller.OrderController
 import au.edu.curtin.fooddeliveryapp.controller.RestaurantController
+import au.edu.curtin.fooddeliveryapp.controller.UserController
 import au.edu.curtin.fooddeliveryapp.database.DBHelper
 import au.edu.curtin.fooddeliveryapp.fragments.Account.AccountFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Browse.BrowseFragment
-import au.edu.curtin.fooddeliveryapp.fragments.Cart.CartByRestaurantFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Cart.CartFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,8 +19,8 @@ class MainActivity : AppCompatActivity() {
     val data = ArrayList<Restaurant>()
     private val database = DBHelper(this)
     private val restaurantController = RestaurantController(database)
-    private val orderController = OrderController(database)
     private val foodController = FoodController(database)
+    private val userController = UserController(database)
 
 
 
@@ -31,8 +30,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val homeFragment = HomeFragment()
-        val cartFragment = CartFragment(orderController, foodController)
-        val cartByRestaurantFragment = CartByRestaurantFragment(foodController)
+        val cartFragment = CartFragment(foodController, userController)
         val acctFragment = AccountFragment()
         val restaurantsFragment = BrowseFragment(restaurantController, foodController)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
@@ -48,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     setCurrentFragment(restaurantsFragment)
                 }
                 R.id.nav_cart -> {
-                    setCurrentFragment(cartByRestaurantFragment)
+                    setCurrentFragment(cartFragment)
                     badgeClear(R.id.nav_cart)
                 }
                 R.id.nav_account -> {

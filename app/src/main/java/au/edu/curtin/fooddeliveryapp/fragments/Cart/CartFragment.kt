@@ -5,21 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
 import au.edu.curtin.fooddeliveryapp.controller.FoodController
-import au.edu.curtin.fooddeliveryapp.controller.OrderController
+import au.edu.curtin.fooddeliveryapp.controller.UserController
+import au.edu.curtin.fooddeliveryapp.fragments.Account.LoginFragment
 
 
-class CartFragment(private val controller: OrderController,
-                   private val foodController: FoodController
-                   ) : Fragment(), CartAdapter.OnItemClickListener {
+class CartFragment(private val foodController: FoodController,
+                   private val userController: UserController
+                  ) : Fragment(), CartAdapter.OnItemClickListener {
 
     private lateinit var adapter: CartAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var foodOrderList: ArrayList<FoodOrder>
+    private lateinit var checkOutBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +38,7 @@ class CartFragment(private val controller: OrderController,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        this.foodOrderList = foodController.getFoodOrders()
+        this.foodOrderList = foodController.getFoodOrders()
         val layoutManager = LinearLayoutManager(context)
 
         recyclerView = view.findViewById(R.id.cart_recycler)
@@ -44,18 +47,41 @@ class CartFragment(private val controller: OrderController,
         adapter = CartAdapter(foodOrderList, this)
         recyclerView.adapter = adapter
 
+        checkOutBtn = view.findViewById(R.id.checkOutButton)
+        checkOutBtn.setOnClickListener {
+
+            if (userController.userLoggedIn()) {
+
+            }
+            else {
+                parentFragmentManager.beginTransaction().apply {
+                    replace(R.id.scrollingFragment, LoginFragment(userController))
+                    commit()
+                }
+            }
+        }
     }
 
     override fun onAddItemClick(position: Int) {
-        TODO("Not yet implemented")
+        foodOrderList[position].amount++
+        adapter.notifyItemChanged(position)
     }
 
     override fun onRemoveItemClick(position: Int) {
-        TODO("Not yet implemented")
+        foodOrderList[position].amount--
+        adapter.notifyItemChanged(position)
     }
 
     override fun onRemoveItemFromCartClick(position: Int) {
-        TODO("Not yet implemented")
+        foodOrderList.removeAt(position)
+        adapter.notifyItemRemoved(position)
+    }
+
+    override fun onCheckOutClick() {
+        parentFragmentManager.beginTransaction().apply {
+            replace(R.id.scrollingFragment, LoginFragment(userController))
+            commit()
+        }
     }
 
 

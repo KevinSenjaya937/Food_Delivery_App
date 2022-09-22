@@ -49,9 +49,8 @@ class BrowseFragment(private val controller : RestaurantController,
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
         val clickedItem = restaurantList[position]
-        adapter.notifyItemChanged(position)
+
         parentFragmentManager.beginTransaction().apply {
             replace(R.id.scrollingFragment, FoodListFragment(foodController, clickedItem))
             commit()

@@ -12,87 +12,38 @@ class FoodController(database: DBHelper) {
 
     private lateinit var currentFoodList: ArrayList<Food>
     private var foodHashMap: HashMap<Int, ArrayList<Food>> = HashMap()
-    private var orderList: ArrayList<Order> = ArrayList()
     private var foodOrderList = ArrayList<FoodOrder>()
-    private var foodOrderHashMap: HashMap<Int, ArrayList<FoodOrder>> = HashMap()
-    private var orderNumber: Int = -1
     private var db = database
-    private var id = 0
     private var restaurantHashMap: HashMap<Int, String> = HashMap()
+    private var loaded = false
 
 
     fun load(restaurantID: Int) {
-        this.currentFoodList = db.getAllFood()
-        if (currentFoodList.isEmpty()) {
+
+        if (!this.loaded) {
             initializeDB()
         }
-    }
-
-    fun getRestaurantName(restaurantID: Int): String? {
-        return restaurantHashMap[restaurantID]
     }
 
     fun getFoodList(restaurantID: Int): java.util.ArrayList<Food>? {
         return foodHashMap[restaurantID]
     }
 
-    fun getOrderList(): ArrayList<Order> {
-        return orderList
-    }
-
-    fun getOrderItemCount(id: Int): Int? {
-        return foodOrderHashMap[id]?.size
-    }
-
-
-
-    fun getFoodOrders(): ArrayList<Int> {
-        val rIDs = ArrayList<Int>()
-        for (restaurantID in foodOrderHashMap.keys) {
-            rIDs.add(restaurantID)
-        }
-        return rIDs
-    }
-
-    fun getFoodOrdersDB(foodOrderID: Int): ArrayList<FoodOrder> {
-        return db.getAllFoodOrders(foodOrderID)
-    }
-
-    fun createOrder(r: Restaurant) {
-        val found = orderList.any { it.restaurantID == r.id }
-
-        if (!found) {
-            val order = Order(0, r.name, r.id, 0, 0, "", "", r.logo, 0)
-            orderList.add(order)
-        }
-    }
-
     fun addFoodOrder(f: Food, amount: Int) {
         val totalPrice = f.price * amount
         val foodOrderID = db.getLastFoodOrderId()
-        val foodOrder = FoodOrder(foodOrderID+1, 0, f.restaurantName, f.name, amount, totalPrice, f.picture)
-        foodOrderHashMap[f.restaurantID]?.add(foodOrder)
+        val foodOrder = FoodOrder(foodOrderID+1, f.restaurantName, f.name, amount, totalPrice, f.picture, "", "", 0)
+        foodOrderList.add(foodOrder)
     }
 
-    fun calculateTotalOrderCost(id: Int): Int {
-        val foodOrders = foodOrderHashMap[id]
-        var total = 0
-        if (foodOrders != null) {
-            for (order in foodOrders) {
-                total += order.totalPrice
-            }
-        }
-        return total
+    fun getFoodOrders(): ArrayList<FoodOrder> {
+        foodOrderList.sortBy { it.restaurantName }
+        return foodOrderList
     }
 
-    fun getLastOrderID(): Int {
-        val lastOrderID = db.getLastOrderId()
 
-        if (lastOrderID == -1) {
-            return 1
-        }
-        return lastOrderID
-    }
+
+
 
 
 
@@ -119,12 +70,12 @@ class FoodController(database: DBHelper) {
 
             insertFoodItems(id, name, foodItems)
             this.foodHashMap[id] = foodItems
-            this.foodOrderHashMap[id] = ArrayList<FoodOrder>()
             this.restaurantHashMap[id] = name
             for (food in foodItems) {
                 Log.d("EMPTY", "${food.name} : ${food.restaurantName}")
             }
         }
+        this.loaded = true
     }
 
     private fun insertFoodItems(id: Int, name: String, foodItems: ArrayList<Food>) {

@@ -1,16 +1,16 @@
 package au.edu.curtin.fooddeliveryapp.fragments.Cart
 
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
-import au.edu.curtin.fooddeliveryapp.fragments.Browse.BrowseAdapter
-import org.w3c.dom.Text
+
 
 class CartAdapter (private val data: ArrayList<FoodOrder>,
                    private val listener: OnItemClickListener
@@ -39,6 +39,7 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
         var foodName: TextView
         var totalPrice: TextView
         var amountText: TextView
+        var dateTimeText: TextView
         var addButton: ImageButton
         var removeButton: ImageButton
         var removeFromCartButton: ImageButton
@@ -49,6 +50,7 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
             foodName = itemView.findViewById(R.id.foodNameText)
             totalPrice = itemView.findViewById(R.id.priceText)
             amountText = itemView.findViewById(R.id.amountTextNumber)
+            dateTimeText = itemView.findViewById(R.id.dateTimeText)
             addButton = itemView.findViewById(R.id.addBtn)
             removeButton = itemView.findViewById(R.id.removeBtn)
             removeFromCartButton = itemView.findViewById(R.id.removeFromCartBtn)
@@ -59,18 +61,19 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
         }
 
         override fun onClick(view: View?) {
+            val position: Int = absoluteAdapterPosition
+
             if (view != null) {
                 when (view.id) {
                     R.id.addBtn -> {
-
+                        listener.onAddItemClick(position)
                     }
                     R.id.removeBtn -> {
-
+                        listener.onRemoveItemClick(position)
                     }
                     R.id.removeFromCartBtn -> {
-
+                        listener.onRemoveItemFromCartClick(position)
                     }
-
                 }
             }
         }
@@ -84,6 +87,14 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
             foodName.text = foodOrder.foodName
             totalPrice.text = "$${total}.00"
             amountText.text = foodOrder.amount.toString()
+
+            if (foodOrder.userID == 0) {
+                dateTimeText.isVisible = false
+            }
+            else {
+                dateTimeText.isVisible = true
+                dateTimeText.text = "Ordered on ${foodOrder.date} at ${foodOrder.time}"
+            }
         }
 
     }
@@ -92,6 +103,7 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
         fun onAddItemClick(position: Int)
         fun onRemoveItemClick(position: Int)
         fun onRemoveItemFromCartClick(position: Int)
+        fun onCheckOutClick()
     }
 
 

@@ -38,29 +38,17 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         // Food Order Table
         const val FOOD_ORDER_ID = "foodOrderID"
-        //ORDER_ID
         //RESTAURANT_NAME
         //FOOD_NAME
         const val FOOD_ORDER_AMOUNT = "amountOrdered"
         const val TOTAL_FOOD_ORDER_PRICE = "foodOrderPrice"
         //FOOD_PICTURE
-
-
-        // Orders Table
-        const val ORDER_ID = "id"
-        //RESTAURANT_NAME
-        //RESTAURANT_ID
-        const val ORDER_ITEM_AMOUNT = "amountOfItems"
-        const val TOTAL_PRICE = "totalPrice"
-        const val TIME = "time"
-        const val DATE = "date"
-        //RESTAURANT_LOGO
+        const val ORDER_DATE = "orderDate"
+        const val ORDER_TIME = "orderTime"
         //USER_ID
 
         // Users Table
         const val USER_ID = "userID"
-        const val FIRST_NAME = "firstName"
-        const val LAST_NAME = "lastName"
         const val EMAIL = "email"
         const val PASSWORD = "password"
     }
@@ -70,14 +58,12 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         val createFoodTable = ("CREATE TABLE $FOOD_TABLE ($RESTAURANT_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_PRICE INTEGER, $FOOD_DESCRIPTION TEXT, $FOOD_PICTURE INTEGER)")
 
-        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($FOOD_ORDER_ID INTEGER PRIMARY KEY, $ORDER_ID INTEGER, $RESTAURANT_NAME TEXT, $RESTAURANT_ID INTEGER, $FOOD_NAME TEXT, $FOOD_ORDER_AMOUNT INTEGER, $TOTAL_FOOD_ORDER_PRICE INTEGER, $FOOD_PICTURE INTEGER)")
+        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($FOOD_ORDER_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_ORDER_AMOUNT INTEGER, $TOTAL_FOOD_ORDER_PRICE INTEGER, $FOOD_PICTURE INTEGER, $ORDER_DATE TEXT, $ORDER_TIME TEXT, $USER_ID INTEGER)")
 
-        val createOrdersTable = ("CREATE TABLE $ORDERS_TABLE ($ORDER_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $ORDER_ITEM_AMOUNT INTEGER, $TOTAL_PRICE INTEGER, $TIME TEXT, $DATE TEXT, $RESTAURANT_LOGO INTEGER, $USER_ID INTEGER)")
-        val createUsersTable = ("CREATE TABLE $USERS_TABLE ($USER_ID INTEGER PRIMARY KEY, $FIRST_NAME TEXT, $LAST_NAME TEXT, $EMAIL TEXT, $PASSWORD TEXT)")
+        val createUsersTable = ("CREATE TABLE $USERS_TABLE ($USER_ID INTEGER PRIMARY KEY, $EMAIL TEXT, $PASSWORD TEXT)")
         db?.execSQL(createRestaurantTable)
         db?.execSQL(createFoodTable)
         db?.execSQL(createFoodOrdersTable)
-        db?.execSQL(createOrdersTable)
         db?.execSQL(createUsersTable)
     }
 
@@ -125,32 +111,16 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         val contentValues = ContentValues()
         contentValues.put(FOOD_ORDER_ID, foodOrder.foodOrderID)
-        contentValues.put(ORDER_ID, foodOrder.orderID)
         contentValues.put(RESTAURANT_NAME, foodOrder.restaurantName)
         contentValues.put(FOOD_NAME, foodOrder.foodName)
         contentValues.put(FOOD_ORDER_AMOUNT, foodOrder.amount)
         contentValues.put(TOTAL_FOOD_ORDER_PRICE, foodOrder.totalPrice)
         contentValues.put(FOOD_PICTURE, foodOrder.foodPicture)
+        contentValues.put(ORDER_DATE, foodOrder.date)
+        contentValues.put(ORDER_TIME, foodOrder.time)
+        contentValues.put(USER_ID, foodOrder.userID)
 
         db.insert(FOOD_ORDER_TABLE, null, contentValues)
-        db.close()
-    }
-
-    //Checked
-    fun insertOrder(order: Order) {
-        val db = this.writableDatabase
-
-        val contentValues = ContentValues()
-        contentValues.put(ORDER_ID, order.orderID)
-        contentValues.put(RESTAURANT_NAME, order.restaurantName)
-        contentValues.put(RESTAURANT_ID, order.restaurantID)
-        contentValues.put(TOTAL_PRICE, order.totalPrice)
-        contentValues.put(TIME, order.time)
-        contentValues.put(DATE, order.date)
-        contentValues.put(RESTAURANT_LOGO, order.restaurantLogo)
-        contentValues.put(USER_ID, order.userID)
-
-        db.insert(ORDERS_TABLE, null, contentValues)
         db.close()
     }
 
@@ -160,8 +130,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         val contentValues = ContentValues()
         contentValues.put(USER_ID, user.userID)
-        contentValues.put(FIRST_NAME, user.firstName)
-        contentValues.put(LAST_NAME, user.lastName)
         contentValues.put(EMAIL, user.email)
         contentValues.put(PASSWORD, user.password)
 
@@ -330,7 +298,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     fun getAllFoodOrders(id: Int) : ArrayList<FoodOrder> {
 
         val foodOrderList: ArrayList<FoodOrder> = ArrayList()
-        val selectQuery = "SELECT * FROM $FOOD_ORDER_TABLE WHERE $ORDER_ID LIKE $id"
+        val selectQuery = "SELECT * FROM $FOOD_ORDER_TABLE"
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -344,95 +312,43 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
 
         var foodOrderID: Int
-        var orderID: Int
         var restaurantName: String
         var foodName: String
         var amount: Int
         var totalPrice: Int
         var foodPicture: Int
+        var date: String
+        var time: String
+        var userID: Int
 
         if (cursor.moveToFirst()) {
             do {
                 foodOrderID = cursor.getInt(cursor.getColumnIndex(FOOD_ORDER_ID))
-                orderID = cursor.getInt(cursor.getColumnIndex(ORDER_ID))
                 restaurantName = cursor.getString(cursor.getColumnIndex(RESTAURANT_NAME))
                 foodName = cursor.getString(cursor.getColumnIndex(FOOD_NAME))
                 amount = cursor.getInt(cursor.getColumnIndex(FOOD_ORDER_AMOUNT))
                 totalPrice = cursor.getInt(cursor.getColumnIndex(TOTAL_FOOD_ORDER_PRICE))
                 foodPicture = cursor.getInt(cursor.getColumnIndex(FOOD_PICTURE))
+                date = cursor.getString(cursor.getColumnIndex(ORDER_DATE))
+                time = cursor.getString(cursor.getColumnIndex(ORDER_TIME))
+                userID = cursor.getInt(cursor.getColumnIndex(USER_ID))
 
-                val foodOrder = FoodOrder(foodOrderID, orderID, restaurantName, foodName, amount, totalPrice,  foodPicture)
+                val foodOrder = FoodOrder(
+                    foodOrderID,
+                    restaurantName,
+                    foodName,
+                    amount,
+                    totalPrice,
+                    foodPicture,
+                    date,
+                    time,
+                    userID
+                )
                 foodOrderList.add(foodOrder)
             } while (cursor.moveToNext())
         }
         cursor.close()
         return foodOrderList
-    }
-
-    // Checked
-    @SuppressLint("Range")
-    fun getLastOrderId(): Int {
-        val selectQuery = "SELECT * FROM $ORDERS_TABLE"
-        val db = this.readableDatabase
-
-        val cursor: Cursor? = db.rawQuery(selectQuery, null)
-
-        var orderID : Int = -1
-
-        if (cursor != null) {
-            if (cursor.moveToLast()) {
-                orderID = cursor.getInt(cursor.getColumnIndex(ORDER_ID))
-            }
-        }
-        cursor?.close()
-        return orderID
-    }
-
-    // Checked
-    @SuppressLint("Range", "Recycle")
-    fun getAllOrders() : ArrayList<Order> {
-
-        val orderList: ArrayList<Order> = ArrayList()
-        val selectQuery = """SELECT * FROM $ORDERS_TABLE"""
-        val db = this.readableDatabase
-
-        val cursor: Cursor?
-
-        try {
-            cursor = db.rawQuery(selectQuery, null)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            db.execSQL(selectQuery)
-            return ArrayList()
-        }
-
-        var orderID: Int
-        var restaurantName: String
-        var restaurantID: Int
-        var amountOfItems: Int
-        var totalPrice: Int
-        var time: String
-        var date: String
-        var restaurantLogo: Int
-        var user: Int
-
-        if (cursor.moveToFirst()) {
-            do {
-                orderID = cursor.getInt(cursor.getColumnIndex(ORDER_ID))
-                restaurantName = cursor.getString(cursor.getColumnIndex(RESTAURANT_NAME))
-                restaurantID = cursor.getInt(cursor.getColumnIndex(RESTAURANT_ID))
-                amountOfItems = cursor.getInt(cursor.getColumnIndex(ORDER_ITEM_AMOUNT))
-                totalPrice = cursor.getInt(cursor.getColumnIndex(TOTAL_PRICE))
-                time = cursor.getString(cursor.getColumnIndex(TIME))
-                date = cursor.getString(cursor.getColumnIndex(DATE))
-                restaurantLogo = cursor.getInt(cursor.getColumnIndex(RESTAURANT_LOGO))
-                user = cursor.getInt(cursor.getColumnIndex(USER_ID))
-
-                val order = Order(orderID, restaurantName, restaurantID, amountOfItems, totalPrice, time, date, restaurantLogo, user)
-                orderList.add(order)
-            } while (cursor.moveToNext())
-        }
-        return orderList
     }
 
     // Checked
@@ -453,20 +369,61 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
 
         val userID: Int
-        val firstName: String
-        val lastName: String
         val userEmail: String
         val userPassword: String
 
         if (cursor.moveToFirst()) {
             userID = cursor.getInt(cursor.getColumnIndex(USER_ID))
-            firstName = cursor.getString(cursor.getColumnIndex(FIRST_NAME))
-            lastName = cursor.getString(cursor.getColumnIndex(LAST_NAME))
             userEmail = cursor.getString(cursor.getColumnIndex(EMAIL))
             userPassword = cursor.getString(cursor.getColumnIndex(PASSWORD))
 
-            return User(userID, firstName, lastName, userEmail, userPassword)
+            return User(userID, userEmail, userPassword)
         }
         return null
+    }
+
+    @SuppressLint("Range")
+    fun userExists(email: String, password: String): Boolean {
+        val selectQuery = "SELECT * FROM $USERS_TABLE"
+        val db = this.readableDatabase
+
+        val cursor: Cursor? = db.rawQuery(selectQuery, null)
+
+        var found = false
+        var userEmail: String
+        var userPassword: String
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    userEmail = cursor.getString(cursor.getColumnIndex(EMAIL))
+                    userPassword = cursor.getString(cursor.getColumnIndex(PASSWORD))
+
+                    if (userEmail == email && userPassword == password) {
+                        found = true
+                    }
+                } while (cursor.moveToNext())
+            }
+        }
+        cursor?.close()
+        return found
+    }
+
+    @SuppressLint("Range")
+    fun getLastUserId(): Int {
+        val selectQuery = "SELECT * FROM $USERS_TABLE"
+        val db = this.readableDatabase
+
+        val cursor: Cursor? = db.rawQuery(selectQuery, null)
+
+        var userID : Int = -1
+
+        if (cursor != null) {
+            if (cursor.moveToLast()) {
+                userID = cursor.getInt(cursor.getColumnIndex(USER_ID))
+            }
+        }
+        cursor?.close()
+        return userID
     }
 }

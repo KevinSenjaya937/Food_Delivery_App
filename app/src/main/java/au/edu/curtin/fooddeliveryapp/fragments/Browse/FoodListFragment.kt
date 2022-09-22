@@ -72,7 +72,6 @@ class FoodListFragment(private val controller: FoodController, private val resta
         if (amount == 0) {
             Toast.makeText(context, "Amount cannot be 0", Toast.LENGTH_SHORT).show()
         } else {
-            controller.createOrder(restaurant)
             controller.addFoodOrder(food, amount)
             (activity as MainActivity).badgeSetup(R.id.nav_cart, orderAmount++)
         }

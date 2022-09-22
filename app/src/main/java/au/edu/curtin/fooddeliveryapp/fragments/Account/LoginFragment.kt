@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import au.edu.curtin.fooddeliveryapp.R
+import au.edu.curtin.fooddeliveryapp.controller.FoodController
 import au.edu.curtin.fooddeliveryapp.controller.UserController
 
-class LoginFragment(private val controller: UserController) : Fragment() {
+class LoginFragment(private val controller: UserController,
+                    private val foodController: FoodController) : Fragment() {
 
     private lateinit var loginBtn: Button
     private lateinit var registerSwitch: androidx.appcompat.widget.SwitchCompat
@@ -44,7 +47,10 @@ class LoginFragment(private val controller: UserController) : Fragment() {
 
                 loginBtn.setOnClickListener {
                     if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
-                        controller.registerUser(emailBox.text.toString(), passwordBox.text.toString())
+                        if (controller.registerUser(emailBox.text.toString(), passwordBox.text.toString())) {
+                            Toast.makeText(context, "User Successfully Registered", Toast.LENGTH_SHORT).show()
+                            switchToUserFragment()
+                        }
                     }
                 }
             } else {
@@ -53,10 +59,22 @@ class LoginFragment(private val controller: UserController) : Fragment() {
 
                 loginBtn.setOnClickListener {
                     if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
-                        controller.loginUser(emailBox.text.toString(), passwordBox.text.toString())
+                        if (controller.loginUser(emailBox.text.toString(), passwordBox.text.toString())) {
+                            Toast.makeText(context, "User Login Successful", Toast.LENGTH_SHORT).show()
+                            switchToUserFragment()
+                        } else {
+                            Toast.makeText(context, "User Login Failed", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
+        }
+    }
+
+    fun switchToUserFragment() {
+        parentFragmentManager.beginTransaction().apply {
+            replace(R.id.scrollingFragment, AccountFragment(controller))
+            commit()
         }
     }
 

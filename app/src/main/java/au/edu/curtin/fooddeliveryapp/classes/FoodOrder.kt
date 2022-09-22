@@ -7,8 +7,7 @@ data class FoodOrder (
     var amount: Int,
     var totalPrice: Int,
     var foodPicture: Int,
-    var date: String,
-    var time: String,
+    var datetime: String,
     var userID: Int,
 
 

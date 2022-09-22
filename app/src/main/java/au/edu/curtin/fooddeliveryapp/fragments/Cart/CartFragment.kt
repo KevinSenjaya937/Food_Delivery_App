@@ -55,7 +55,7 @@ class CartFragment(private val foodController: FoodController,
             }
             else {
                 parentFragmentManager.beginTransaction().apply {
-                    replace(R.id.scrollingFragment, LoginFragment(userController))
+                    replace(R.id.scrollingFragment, LoginFragment(userController, foodController))
                     commit()
                 }
             }
@@ -78,10 +78,6 @@ class CartFragment(private val foodController: FoodController,
     }
 
     override fun onCheckOutClick() {
-        parentFragmentManager.beginTransaction().apply {
-            replace(R.id.scrollingFragment, LoginFragment(userController))
-            commit()
-        }
     }
 
 

@@ -43,8 +43,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val FOOD_ORDER_AMOUNT = "amountOrdered"
         const val TOTAL_FOOD_ORDER_PRICE = "foodOrderPrice"
         //FOOD_PICTURE
-        const val ORDER_DATE = "orderDate"
-        const val ORDER_TIME = "orderTime"
+        const val ORDER_DATE_TIME = "orderDateTime"
         //USER_ID
 
         // Users Table
@@ -58,7 +57,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         val createFoodTable = ("CREATE TABLE $FOOD_TABLE ($RESTAURANT_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_PRICE INTEGER, $FOOD_DESCRIPTION TEXT, $FOOD_PICTURE INTEGER)")
 
-        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($FOOD_ORDER_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_ORDER_AMOUNT INTEGER, $TOTAL_FOOD_ORDER_PRICE INTEGER, $FOOD_PICTURE INTEGER, $ORDER_DATE TEXT, $ORDER_TIME TEXT, $USER_ID INTEGER)")
+        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($FOOD_ORDER_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_ORDER_AMOUNT INTEGER, $TOTAL_FOOD_ORDER_PRICE INTEGER, $FOOD_PICTURE INTEGER, $ORDER_DATE_TIME TEXT, $USER_ID INTEGER)")
 
         val createUsersTable = ("CREATE TABLE $USERS_TABLE ($USER_ID INTEGER PRIMARY KEY, $EMAIL TEXT, $PASSWORD TEXT)")
         db?.execSQL(createRestaurantTable)
@@ -116,8 +115,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         contentValues.put(FOOD_ORDER_AMOUNT, foodOrder.amount)
         contentValues.put(TOTAL_FOOD_ORDER_PRICE, foodOrder.totalPrice)
         contentValues.put(FOOD_PICTURE, foodOrder.foodPicture)
-        contentValues.put(ORDER_DATE, foodOrder.date)
-        contentValues.put(ORDER_TIME, foodOrder.time)
+        contentValues.put(ORDER_DATE_TIME, foodOrder.datetime)
         contentValues.put(USER_ID, foodOrder.userID)
 
         db.insert(FOOD_ORDER_TABLE, null, contentValues)
@@ -295,7 +293,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
     // Checked
     @SuppressLint("Range")
-    fun getAllFoodOrders(id: Int) : ArrayList<FoodOrder> {
+    fun getAllFoodOrdersByUser(userID: Int) : ArrayList<FoodOrder> {
 
         val foodOrderList: ArrayList<FoodOrder> = ArrayList()
         val selectQuery = "SELECT * FROM $FOOD_ORDER_TABLE"
@@ -317,9 +315,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         var amount: Int
         var totalPrice: Int
         var foodPicture: Int
-        var date: String
-        var time: String
-        var userID: Int
+        var datetime: String
+        var user: Int
 
         if (cursor.moveToFirst()) {
             do {
@@ -329,9 +326,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                 amount = cursor.getInt(cursor.getColumnIndex(FOOD_ORDER_AMOUNT))
                 totalPrice = cursor.getInt(cursor.getColumnIndex(TOTAL_FOOD_ORDER_PRICE))
                 foodPicture = cursor.getInt(cursor.getColumnIndex(FOOD_PICTURE))
-                date = cursor.getString(cursor.getColumnIndex(ORDER_DATE))
-                time = cursor.getString(cursor.getColumnIndex(ORDER_TIME))
-                userID = cursor.getInt(cursor.getColumnIndex(USER_ID))
+                datetime = cursor.getString(cursor.getColumnIndex(ORDER_DATE_TIME))
+                user = cursor.getInt(cursor.getColumnIndex(USER_ID))
 
                 val foodOrder = FoodOrder(
                     foodOrderID,
@@ -340,73 +336,47 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                     amount,
                     totalPrice,
                     foodPicture,
-                    date,
-                    time,
+                    datetime,
                     userID
                 )
-                foodOrderList.add(foodOrder)
+
+                if (user == userID) {
+                    foodOrderList.add(foodOrder)
+                }
+
             } while (cursor.moveToNext())
         }
         cursor.close()
         return foodOrderList
     }
 
-    // Checked
-    @SuppressLint("Range", "Recycle")
-    fun getUser(email: String, password: String): User? {
-
-        val selectQuery = """SELECT * FROM $USERS_TABLE WHERE $EMAIL LIKE $email AND $PASSWORD LIKE $password"""
-        val db = this.readableDatabase
-
-        val cursor: Cursor?
-
-        try {
-            cursor = db.rawQuery(selectQuery, null)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            db.execSQL(selectQuery)
-            return null
-        }
-
-        val userID: Int
-        val userEmail: String
-        val userPassword: String
-
-        if (cursor.moveToFirst()) {
-            userID = cursor.getInt(cursor.getColumnIndex(USER_ID))
-            userEmail = cursor.getString(cursor.getColumnIndex(EMAIL))
-            userPassword = cursor.getString(cursor.getColumnIndex(PASSWORD))
-
-            return User(userID, userEmail, userPassword)
-        }
-        return null
-    }
-
     @SuppressLint("Range")
-    fun userExists(email: String, password: String): Boolean {
+    fun userExists(email: String, password: String): User? {
         val selectQuery = "SELECT * FROM $USERS_TABLE"
         val db = this.readableDatabase
 
         val cursor: Cursor? = db.rawQuery(selectQuery, null)
 
-        var found = false
+        var user: User? = null
         var userEmail: String
         var userPassword: String
+        var userID: Int
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
                     userEmail = cursor.getString(cursor.getColumnIndex(EMAIL))
                     userPassword = cursor.getString(cursor.getColumnIndex(PASSWORD))
+                    userID = cursor.getInt(cursor.getColumnIndex(USER_ID))
 
                     if (userEmail == email && userPassword == password) {
-                        found = true
+                        user = User(userID, userEmail, userPassword)
                     }
                 } while (cursor.moveToNext())
             }
         }
         cursor?.close()
-        return found
+        return user
     }
 
     @SuppressLint("Range")

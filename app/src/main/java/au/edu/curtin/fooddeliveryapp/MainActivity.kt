@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val homeFragment = HomeFragment()
         val cartFragment = CartFragment(foodController, userController)
-        val acctFragment = AccountFragment()
+        val acctFragment = AccountFragment(userController)
         val restaurantsFragment = BrowseFragment(restaurantController, foodController)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 

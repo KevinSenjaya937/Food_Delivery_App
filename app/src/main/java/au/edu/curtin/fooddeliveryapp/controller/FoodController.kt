@@ -1,12 +1,19 @@
 package au.edu.curtin.fooddeliveryapp.controller
 
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Food
 import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
-import au.edu.curtin.fooddeliveryapp.classes.Order
-import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 import au.edu.curtin.fooddeliveryapp.database.DBHelper
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class FoodController(database: DBHelper) {
 
@@ -32,13 +39,28 @@ class FoodController(database: DBHelper) {
     fun addFoodOrder(f: Food, amount: Int) {
         val totalPrice = f.price * amount
         val foodOrderID = db.getLastFoodOrderId()
-        val foodOrder = FoodOrder(foodOrderID+1, f.restaurantName, f.name, amount, totalPrice, f.picture, "", "", 0)
+        val foodOrder = FoodOrder(foodOrderID+1, f.restaurantName, f.name, amount, totalPrice, f.picture, "", 0)
         foodOrderList.add(foodOrder)
     }
 
     fun getFoodOrders(): ArrayList<FoodOrder> {
         foodOrderList.sortBy { it.restaurantName }
         return foodOrderList
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkOut(userID: Int) {
+        val simpleDatetime = SimpleDateFormat("EEE, MMM d, h:mm a")
+
+        val currentDate = simpleDatetime.format(Date())
+        val datetime = "Ordered on $currentDate"
+
+        for (fo in foodOrderList) {
+            fo.datetime = datetime
+            fo.userID = userID
+            db.insertFoodOrder(fo)
+        }
     }
 
 

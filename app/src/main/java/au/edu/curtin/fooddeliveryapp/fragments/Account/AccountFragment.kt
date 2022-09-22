@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import au.edu.curtin.fooddeliveryapp.R
+import au.edu.curtin.fooddeliveryapp.controller.UserController
 
-class AccountFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+class AccountFragment(private val userController: UserController) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

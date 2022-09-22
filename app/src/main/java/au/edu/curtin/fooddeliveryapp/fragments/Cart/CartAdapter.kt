@@ -93,7 +93,7 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
             }
             else {
                 dateTimeText.isVisible = true
-                dateTimeText.text = "Ordered on ${foodOrder.date} at ${foodOrder.time}"
+                dateTimeText.text = foodOrder.datetime
             }
         }
 

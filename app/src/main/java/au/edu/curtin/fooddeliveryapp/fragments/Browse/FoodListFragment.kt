@@ -27,12 +27,6 @@ class FoodListFragment(private val controller: FoodController, private val resta
     private lateinit var foodList: ArrayList<Food>
     private var orderAmount = 1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        controller.load(restaurant.id)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

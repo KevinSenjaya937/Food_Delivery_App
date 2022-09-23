@@ -29,6 +29,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val RESTAURANT_LOGO = "logo"
 
         // Food Table
+        const val FOOD_ID = "foodID"
         // RESTAURANT_ID
         // RESTAURANT_NAME
         const val FOOD_NAME = "foodName"
@@ -53,11 +54,11 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val createRestaurantTable = ("CREATE TABLE $RESTAURANT_TABLE ($RESTAURANT_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_TYPE TEXT, $RESTAURANT_LOCATION TEXT, $RESTAURANT_LOGO INTEGER)")
+        val createRestaurantTable = ("CREATE TABLE $RESTAURANT_TABLE ($RESTAURANT_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_TYPE TEXT, $RESTAURANT_LOCATION TEXT, $RESTAURANT_LOGO TEXT)")
 
-        val createFoodTable = ("CREATE TABLE $FOOD_TABLE ($RESTAURANT_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_PRICE INTEGER, $FOOD_DESCRIPTION TEXT, $FOOD_PICTURE INTEGER)")
+        val createFoodTable = ("CREATE TABLE $FOOD_TABLE ($FOOD_ID INTEGER PRIMARY KEY, $RESTAURANT_ID INTEGER, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_PRICE INTEGER, $FOOD_DESCRIPTION TEXT, $FOOD_PICTURE TEXT)")
 
-        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($FOOD_ORDER_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_ORDER_AMOUNT INTEGER, $TOTAL_FOOD_ORDER_PRICE INTEGER, $FOOD_PICTURE INTEGER, $ORDER_DATE_TIME TEXT, $USER_ID INTEGER)")
+        val createFoodOrdersTable = ("CREATE TABLE $FOOD_ORDER_TABLE ($FOOD_ORDER_ID INTEGER PRIMARY KEY, $RESTAURANT_NAME TEXT, $FOOD_NAME TEXT, $FOOD_ORDER_AMOUNT INTEGER, $TOTAL_FOOD_ORDER_PRICE INTEGER, $FOOD_PICTURE TEXT, $ORDER_DATE_TIME TEXT, $USER_ID INTEGER)")
 
         val createUsersTable = ("CREATE TABLE $USERS_TABLE ($USER_ID INTEGER PRIMARY KEY, $EMAIL TEXT, $PASSWORD TEXT)")
         db?.execSQL(createRestaurantTable)
@@ -213,7 +214,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         var name: String
         var foodType: String
         var location: String
-        var logo: Int
+        var logo: String
 
         if (cursor.moveToFirst()) {
             do {
@@ -221,7 +222,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                 name = cursor.getString(cursor.getColumnIndex(RESTAURANT_NAME))
                 foodType = cursor.getString(cursor.getColumnIndex(FOOD_TYPE))
                 location = cursor.getString(cursor.getColumnIndex(RESTAURANT_LOCATION))
-                logo = cursor.getInt(cursor.getColumnIndex(RESTAURANT_LOGO))
+                logo = cursor.getString(cursor.getColumnIndex(RESTAURANT_LOGO))
 
                 val restaurant = Restaurant(id, name, foodType, location, logo)
                 restaurantList.add(restaurant)
@@ -249,27 +250,47 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             return ArrayList()
         }
 
+        var foodID: Int
         var restaurantID: Int
         var restaurantName: String
         var name: String
         var price: Int
         var description: String
-        var picture: Int
+        var picture: String
 
         if (cursor.moveToFirst()) {
             do {
+                foodID = cursor.getInt(cursor.getColumnIndex(FOOD_ID))
                 restaurantID = cursor.getInt(cursor.getColumnIndex(RESTAURANT_ID))
                 restaurantName = cursor.getString(cursor.getColumnIndex(RESTAURANT_NAME))
                 name = cursor.getString(cursor.getColumnIndex(FOOD_NAME))
                 price = cursor.getInt(cursor.getColumnIndex(FOOD_PRICE))
                 description = cursor.getString(cursor.getColumnIndex(FOOD_DESCRIPTION))
-                picture = cursor.getInt(cursor.getColumnIndex(FOOD_PICTURE))
+                picture = cursor.getString(cursor.getColumnIndex(FOOD_PICTURE))
 
-                val food = Food(restaurantID, restaurantName, name, price, description, picture)
+                val food = Food(foodID, restaurantID, restaurantName, name, price, description, picture)
                 foodList.add(food)
             } while (cursor.moveToNext())
         }
         return foodList
+    }
+
+    @SuppressLint("Range")
+    fun getLastFoodId(): Int {
+        val selectQuery = "SELECT * FROM $FOOD_TABLE"
+        val db = this.readableDatabase
+
+        val cursor: Cursor? = db.rawQuery(selectQuery, null)
+
+        var foodID : Int = -1
+
+        if (cursor != null) {
+            if (cursor.moveToLast()) {
+                foodID = cursor.getInt(cursor.getColumnIndex(FOOD_ID))
+            }
+        }
+        cursor?.close()
+        return foodID
     }
 
     // Checked
@@ -314,7 +335,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         var foodName: String
         var amount: Int
         var totalPrice: Int
-        var foodPicture: Int
+        var foodPicture: String
         var datetime: String
         var user: Int
 
@@ -325,7 +346,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                 foodName = cursor.getString(cursor.getColumnIndex(FOOD_NAME))
                 amount = cursor.getInt(cursor.getColumnIndex(FOOD_ORDER_AMOUNT))
                 totalPrice = cursor.getInt(cursor.getColumnIndex(TOTAL_FOOD_ORDER_PRICE))
-                foodPicture = cursor.getInt(cursor.getColumnIndex(FOOD_PICTURE))
+                foodPicture = cursor.getString(cursor.getColumnIndex(FOOD_PICTURE))
                 datetime = cursor.getString(cursor.getColumnIndex(ORDER_DATE_TIME))
                 user = cursor.getInt(cursor.getColumnIndex(USER_ID))
 

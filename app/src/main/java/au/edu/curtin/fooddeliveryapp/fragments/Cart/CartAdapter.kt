@@ -10,6 +10,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 
 class CartAdapter (private val data: ArrayList<FoodOrder>,
@@ -79,10 +81,19 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
         }
 
         fun bind(foodOrder: FoodOrder) {
+
+            val requestOptions = RequestOptions()
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+
+            Glide.with(itemView.context)
+                .load(foodOrder.foodPicture)
+                .into(foodImage)
+
             this.foodOrder = foodOrder
             val total = foodOrder.totalPrice.toString()
 
-            foodImage.setImageResource(foodOrder.foodPicture)
+
             restaurantName.text = foodOrder.restaurantName
             foodName.text = foodOrder.foodName
             totalPrice.text = "$${total}.00"

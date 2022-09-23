@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Food
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class FoodListAdapter (private val data: ArrayList<Food>,
                        private val listener: OnItemClickListener
@@ -36,7 +38,7 @@ class FoodListAdapter (private val data: ArrayList<Food>,
     inner class FoodViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         private lateinit var food: Food
-        var foodImage: ImageView
+        var foodImage: de.hdodenhof.circleimageview.CircleImageView
         var foodName: TextView
         var price: TextView
         var description: TextView
@@ -63,8 +65,15 @@ class FoodListAdapter (private val data: ArrayList<Food>,
 
 
         fun bind(food: Food) {
+            val requestOptions = RequestOptions()
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+
+            Glide.with(itemView.context)
+                .load(food.picture)
+                .into(foodImage)
+
             this.food = food
-            foodImage.setImageResource(food.picture)
             foodName.text = food.name
             price.text = "$${food.price}.00"
             description.text = food.description

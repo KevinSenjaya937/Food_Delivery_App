@@ -1,0 +1,157 @@
+foodID,restaurantID,restaurantName,foodName,price,description,picture
+1,1,KFC,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+2,1,KFC,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+3,1,KFC,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+4,1,KFC,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+5,1,KFC,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+6,1,KFC,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+7,1,KFC,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+8,1,KFC,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+9,1,KFC,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+10,1,KFC,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+11,1,KFC,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+12,1,KFC,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+13,2,McDonald's,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+14,2,McDonald's,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+15,2,McDonald's,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+16,2,McDonald's,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+17,2,McDonald's,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+18,2,McDonald's,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+19,2,McDonald's,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+20,2,McDonald's,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+21,2,McDonald's,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+22,2,McDonald's,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+23,2,McDonald's,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+24,2,McDonald's,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+25,3,Hungry Jack's,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+26,3,Hungry Jack's,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+27,3,Hungry Jack's,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+28,3,Hungry Jack's,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+29,3,Hungry Jack's,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+30,3,Hungry Jack's,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+31,3,Hungry Jack's,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+32,3,Hungry Jack's,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+33,3,Hungry Jack's,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+34,3,Hungry Jack's,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+35,3,Hungry Jack's,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+36,3,Hungry Jack's,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+37,4,Subway,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+38,4,Subway,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+39,4,Subway,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+40,4,Subway,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+41,4,Subway,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+42,4,Subway,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+43,4,Subway,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+44,4,Subway,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+45,4,Subway,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+46,4,Subway,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+47,4,Subway,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+48,4,Subway,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+49,5,Taco Bell,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+50,5,Taco Bell,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+51,5,Taco Bell,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+52,5,Taco Bell,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+53,5,Taco Bell,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+54,5,Taco Bell,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+55,5,Taco Bell,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+56,5,Taco Bell,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+57,5,Taco Bell,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+58,5,Taco Bell,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+59,5,Taco Bell,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+60,5,Taco Bell,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+61,6,Wendy's,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+62,6,Wendy's,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+63,6,Wendy's,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+64,6,Wendy's,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+65,6,Wendy's,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+66,6,Wendy's,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+67,6,Wendy's,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+68,6,Wendy's,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+69,6,Wendy's,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+70,6,Wendy's,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+71,6,Wendy's,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+72,6,Wendy's,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+73,7,Jollibee,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+74,7,Jollibee,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+75,7,Jollibee,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+76,7,Jollibee,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+77,7,Jollibee,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+78,7,Jollibee,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+79,7,Jollibee,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+80,7,Jollibee,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+81,7,Jollibee,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+82,7,Jollibee,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+83,7,Jollibee,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+84,7,Jollibee,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+85,8,Nandos,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+86,8,Nandos,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+87,8,Nandos,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+88,8,Nandos,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+89,8,Nandos,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+90,8,Nandos,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+91,8,Nandos,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+92,8,Nandos,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+93,8,Nandos,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+94,8,Nandos,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+95,8,Nandos,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+96,8,Nandos,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+97,9,Dominos,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+98,9,Dominos,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+99,9,Dominos,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+100,9,Dominos,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+101,9,Dominos,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+102,9,Dominos,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+103,9,Dominos,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+104,9,Dominos,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+105,9,Dominos,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+106,9,Dominos,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+107,9,Dominos,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+108,9,Dominos,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+109,10,Pizza Hut,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+110,10,Pizza Hut,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+111,10,Pizza Hut,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+112,10,Pizza Hut,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+113,10,Pizza Hut,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+114,10,Pizza Hut,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+115,10,Pizza Hut,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+116,10,Pizza Hut,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+117,10,Pizza Hut,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+118,10,Pizza Hut,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+119,10,Pizza Hut,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+120,10,Pizza Hut,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+121,11,Starbukcks,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+122,11,Starbukcks,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+123,11,Starbukcks,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+124,11,Starbukcks,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+125,11,Starbukcks,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+126,11,Starbukcks,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+127,11,Starbukcks,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+128,11,Starbukcks,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+129,11,Starbukcks,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+130,11,Starbukcks,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+131,11,Starbukcks,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+132,11,Starbukcks,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+133,12,Dunkin' Donuts,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+134,12,Dunkin' Donuts,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+135,12,Dunkin' Donuts,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+136,12,Dunkin' Donuts,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+137,12,Dunkin' Donuts,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+138,12,Dunkin' Donuts,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+139,12,Dunkin' Donuts,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+140,12,Dunkin' Donuts,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+141,12,Dunkin' Donuts,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+142,12,Dunkin' Donuts,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+143,12,Dunkin' Donuts,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+144,12,Dunkin' Donuts,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+145,13,Chick-fil-A,Fries,4,860kJ,https://images.pexels.com/photos/115740/pexels-photo-115740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+146,13,Chick-fil-A,Burger,10,1860kJ,https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg
+147,13,Chick-fil-A,Soft Drink,3,560kJ,https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+148,13,Chick-fil-A,Grilled Chicken,9,1560kJ,https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+149,13,Chick-fil-A,Fish and Chips,12,2860kJ,https://images.pexels.com/photos/12310564/pexels-photo-12310564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+150,13,Chick-fil-A,Kebab,11,1760kJ,https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+151,13,Chick-fil-A,Burrito,9,1740kJ,https://images.pexels.com/photos/9258717/pexels-photo-9258717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+152,13,Chick-fil-A,Tacos,15,1440kJ,https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+153,13,Chick-fil-A,Fried Chicken,15,2470kJ,https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+154,13,Chick-fil-A,Pizza,10,1470kJ,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+155,13,Chick-fil-A,Sub Sandwich,10,1870kJ,https://images.pexels.com/photos/6605338/pexels-photo-6605338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+156,13,Chick-fil-A,Cookies,6,1270kJ,https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1

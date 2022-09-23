@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Restaurant
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class BrowseAdapter (private val data : ArrayList<Restaurant>,
                      private val listener: OnItemClickListener
@@ -56,8 +58,16 @@ class BrowseAdapter (private val data : ArrayList<Restaurant>,
         }
 
         fun bind(restaurant: Restaurant) {
+            val requestOptions = RequestOptions()
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+
+            Glide.with(itemView.context)
+                .load(restaurant.logo)
+                .into(logoImage)
+
+
             this.restaurant = restaurant
-            logoImage.setImageResource(restaurant.logo)
             restaurantName.text = restaurant.name
             foodType.text = restaurant.foodType
             location.text = restaurant.location

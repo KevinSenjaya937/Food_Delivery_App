@@ -22,11 +22,6 @@ class BrowseFragment(private val controller : RestaurantController,
     private lateinit var recyclerView: RecyclerView
     private lateinit var restaurantList: ArrayList<Restaurant>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        controller.load()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

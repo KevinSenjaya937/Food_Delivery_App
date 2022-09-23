@@ -7,28 +7,52 @@ import androidx.annotation.RequiresApi
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Food
 import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
+import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 import au.edu.curtin.fooddeliveryapp.database.DBHelper
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import kotlin.math.log
 
 class FoodController(database: DBHelper) {
 
-    private lateinit var currentFoodList: ArrayList<Food>
+    private lateinit var foodList: List<Food>
     private var foodHashMap: HashMap<Int, ArrayList<Food>> = HashMap()
     private var foodOrderList = ArrayList<FoodOrder>()
     private var db = database
-    private var restaurantHashMap: HashMap<Int, String> = HashMap()
     private var loaded = false
 
 
-    fun load(restaurantID: Int) {
+    fun load(data: InputStreamReader) {
 
-        if (!this.loaded) {
-            initializeDB()
+        this.foodList = getList()
+
+        if (foodList.isEmpty()) {
+            initializeDB(data)
+        } else {
+            initializeHashmap()
+        }
+    }
+
+    fun getList(): ArrayList<Food> {
+        return db.getAllFood()
+    }
+
+    fun initializeHashmap() {
+        foodHashMap.clear()
+        val restaurants = db.getAllRestaurants()
+
+        for (restaurant in restaurants) {
+            foodHashMap[restaurant.id] = ArrayList<Food>()
+        }
+
+        for (food in foodList) {
+            foodHashMap[food.restaurantID]?.add(food)
         }
     }
 
@@ -80,38 +104,25 @@ class FoodController(database: DBHelper) {
 
 
 
-
-
-    private fun initializeDB(){
-
-        val restaurantNames = db.getRestaurantNames()
-
-        for (name in restaurantNames) {
-            val foodItems = ArrayList<Food>()
-            val id = db.getRestaurantID(name)
-
-            insertFoodItems(id, name, foodItems)
-            this.foodHashMap[id] = foodItems
-            this.restaurantHashMap[id] = name
-            for (food in foodItems) {
-                Log.d("EMPTY", "${food.name} : ${food.restaurantName}")
-            }
-        }
-        this.loaded = true
+    fun readFoodData(inputStreamReader: InputStreamReader): List<Food> {
+        val reader = BufferedReader(inputStreamReader)
+        val header = reader.readLine()
+        return reader.lineSequence()
+            .filter { it.isNotBlank() }
+            .map {
+                val (foodID, rID, rName, fName, fPrice, fDesc, fPic) = it.split(',', ignoreCase = false, limit = 7)
+                Food(foodID.toInt(), rID.toInt(), rName, fName, fPrice.toInt(), fDesc, fPic)
+            }.toList()
     }
 
-    private fun insertFoodItems(id: Int, name: String, foodItems: ArrayList<Food>) {
-        foodItems.add(Food(id, name,"Fries", 4, "860kJ", R.drawable.fries_pic))
-        foodItems.add(Food(id, name, "Burger", 10, "1860kJ", R.drawable.burger_pic))
-        foodItems.add(Food(id, name, "Soft Drink", 3, "560kJ", R.drawable.drink_pic))
-        foodItems.add(Food(id, name, "Grilled Chicken", 9, "1560kJ", R.drawable.grilled_chicken_pic))
-        foodItems.add(Food(id, name, "Fish and Chips", 12, "2860kJ", R.drawable.fish_and_chips_pic))
-        foodItems.add(Food(id, name, "Kebab", 11, "1760kJ", R.drawable.kebab_pic))
-        foodItems.add(Food(id, name, "Burrito", 9, "1740kJ", R.drawable.burrito_pic))
-        foodItems.add(Food(id, name, "Tacos", 15, "1440kJ", R.drawable.tacos_pic))
-        foodItems.add(Food(id, name, "Fried Chicken", 15, "2470kJ", R.drawable.fried_chicken_pic))
-        foodItems.add(Food(id, name, "Pizza", 10, "1470kJ", R.drawable.pizza_pic))
-        foodItems.add(Food(id, name, "Sub Sandwich", 10, "1870kJ", R.drawable.sub_sandwich_pic))
-        foodItems.add(Food(id, name, "Cookies", 6, "1270kJ", R.drawable.cookies_pic))
+    fun initializeDB(inputStreamReader: InputStreamReader){
+        this.foodList = readFoodData(inputStreamReader)
+        initializeHashmap()
     }
+
 }
+
+private operator fun <E> List<E>.component6(): E = get(5)
+
+private operator fun <E> List<E>.component7(): E = get(6)
+

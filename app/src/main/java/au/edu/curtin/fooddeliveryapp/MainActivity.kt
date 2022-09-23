@@ -13,6 +13,7 @@ import au.edu.curtin.fooddeliveryapp.fragments.Browse.BrowseFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Cart.CartFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.InputStreamReader
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,12 +29,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        val restaurantData = InputStreamReader(assets.open("restaurants.csv"))
+        val foodData = InputStreamReader(assets.open("food.csv"))
         val homeFragment = HomeFragment()
         val cartFragment = CartFragment(foodController, userController)
         val acctFragment = AccountFragment(userController)
         val restaurantsFragment = BrowseFragment(restaurantController, foodController)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
+
+        restaurantController.load(restaurantData)
+        foodController.load(foodData)
 
         setCurrentFragment(homeFragment)
 

@@ -6,10 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
+import au.edu.curtin.fooddeliveryapp.classes.Food
+import au.edu.curtin.fooddeliveryapp.controller.FoodController
+import au.edu.curtin.fooddeliveryapp.fragments.Browse.FoodListAdapter
 import com.bumptech.glide.Glide
 
-class HomeFragment : Fragment() {
+class HomeFragment(private val controller: FoodController
+                  ) : Fragment(), FoodListAdapter.OnItemClickListener {
+
+    private lateinit var adapter: HomeAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var dailyDeals: ArrayList<Food>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,8 +29,23 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var image = view.findViewById<ImageView>(R.id.home_image)
+        this.dailyDeals = controller.getDailyDeals()
 
-        Glide.with(this).load("https://images.pexels.com/photos/3686790/pexels-photo-3686790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1").into(image)
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        recyclerView = view.findViewById(R.id.dailyDealRecycler)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.setHasFixedSize(true)
+        adapter = HomeAdapter(dailyDeals)
+        recyclerView.adapter = adapter
+    }
+
+    override fun onAddItemClick(position: Int, amount: Int) {
+    }
+
+    override fun onRemoveItemClick(position: Int, amount: Int) {
+    }
+
+    override fun onAddItemToOrderClick(position: Int, amount: Int) {
     }
 }

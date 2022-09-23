@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val restaurantData = InputStreamReader(assets.open("restaurants.csv"))
         val foodData = InputStreamReader(assets.open("food.csv"))
-        val homeFragment = HomeFragment()
+        val homeFragment = HomeFragment(foodController)
         val cartFragment = CartFragment(foodController, userController)
         val acctFragment = AccountFragment(userController)
         val restaurantsFragment = BrowseFragment(restaurantController, foodController)

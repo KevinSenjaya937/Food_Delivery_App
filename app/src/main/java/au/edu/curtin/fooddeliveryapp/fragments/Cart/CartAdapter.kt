@@ -101,10 +101,16 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
 
             if (foodOrder.userID == 0) {
                 dateTimeText.isVisible = false
+                addButton.isVisible = true
+                removeButton.isVisible = true
+                removeFromCartButton.isVisible = true
             }
             else {
                 dateTimeText.isVisible = true
                 dateTimeText.text = foodOrder.datetime
+                addButton.isVisible = false
+                removeButton.isVisible = false
+                removeFromCartButton.isVisible = false
             }
         }
 

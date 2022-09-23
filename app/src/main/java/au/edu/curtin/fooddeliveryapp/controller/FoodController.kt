@@ -18,6 +18,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.math.log
+import kotlin.random.Random
+import kotlin.random.Random.Default.nextInt
 
 class FoodController(database: DBHelper) {
 
@@ -85,6 +87,24 @@ class FoodController(database: DBHelper) {
             fo.userID = userID
             db.insertFoodOrder(fo)
         }
+
+        foodOrderList.clear()
+    }
+
+    fun getDailyDeals(): ArrayList<Food> {
+        val size = 10
+        val foodSet = HashSet<Int>(size)
+        while (foodSet.size < size) {
+            foodSet += Random.nextInt(1,156)
+        }
+
+        val dailyDeals = ArrayList<Food>()
+
+        for (foodID in foodSet) {
+            dailyDeals.add(foodList[foodID])
+        }
+
+        return dailyDeals
     }
 
 
@@ -118,6 +138,10 @@ class FoodController(database: DBHelper) {
     fun initializeDB(inputStreamReader: InputStreamReader){
         this.foodList = readFoodData(inputStreamReader)
         initializeHashmap()
+
+        for (food in foodList) {
+            db.insertFood(food)
+        }
     }
 
 }

@@ -19,7 +19,8 @@ import au.edu.curtin.fooddeliveryapp.controller.FoodController
 import au.edu.curtin.fooddeliveryapp.fragments.Browse.FoodListAdapter
 
 
-class FoodListFragment(private val controller: FoodController, private val restaurant: Restaurant): Fragment(), FoodListAdapter.OnItemClickListener {
+class FoodListFragment(private val controller: FoodController, private val restaurant: Restaurant
+                      ): Fragment(), FoodListAdapter.OnItemClickListener {
 
     private lateinit var adapter: FoodListAdapter
     private lateinit var recyclerView: RecyclerView

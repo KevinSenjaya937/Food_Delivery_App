@@ -12,7 +12,8 @@ class UserController(database: DBHelper) {
     private var statusText = ""
 
     fun registerUser(email: String, password: String): Boolean {
-        val lastUserID = db.getLastUserId()
+        var lastUserID = db.getLastUserId()
+
         val user = User(lastUserID+1, email, password)
         db.insertUser(user)
 
@@ -46,11 +47,15 @@ class UserController(database: DBHelper) {
         return userLoggedIn
     }
 
+    fun getUserID(): Int {
+        return currentUser.userID
+    }
+
     fun getStatusText(): String {
         return statusText
     }
 
-    fun getUserPastOrders(): List<FoodOrder> {
+    fun getUserPastOrders(): ArrayList<FoodOrder> {
         if (userLoggedIn) {
             return db.getAllFoodOrdersByUser(currentUser.userID)
         } else {

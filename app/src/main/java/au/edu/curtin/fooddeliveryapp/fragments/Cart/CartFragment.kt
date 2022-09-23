@@ -24,10 +24,6 @@ class CartFragment(private val foodController: FoodController,
     private lateinit var foodOrderList: ArrayList<FoodOrder>
     private lateinit var checkOutBtn: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

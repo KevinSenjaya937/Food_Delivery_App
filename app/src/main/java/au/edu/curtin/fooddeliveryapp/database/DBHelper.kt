@@ -407,7 +407,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         val cursor: Cursor? = db.rawQuery(selectQuery, null)
 
-        var userID : Int = -1
+        var userID : Int = 0
 
         if (cursor != null) {
             if (cursor.moveToLast()) {

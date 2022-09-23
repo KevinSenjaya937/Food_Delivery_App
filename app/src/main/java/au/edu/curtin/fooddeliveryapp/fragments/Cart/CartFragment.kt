@@ -1,11 +1,14 @@
 package au.edu.curtin.fooddeliveryapp.fragments.Cart
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
@@ -31,6 +34,7 @@ class CartFragment(private val foodController: FoodController,
         return inflater.inflate(R.layout.fragment_cart, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,7 +51,8 @@ class CartFragment(private val foodController: FoodController,
         checkOutBtn.setOnClickListener {
 
             if (userController.userLoggedIn()) {
-
+                foodController.checkOut(userController.getUserID())
+                Toast.makeText(context, "Order Made", Toast.LENGTH_SHORT).show()
             }
             else {
                 parentFragmentManager.beginTransaction().apply {

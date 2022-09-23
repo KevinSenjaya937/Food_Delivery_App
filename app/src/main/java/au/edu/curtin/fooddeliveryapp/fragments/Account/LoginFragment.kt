@@ -45,6 +45,16 @@ class LoginFragment(private val controller: UserController,
         emailBox = view.findViewById(R.id.editTextTextEmailAddress)
         passwordBox = view.findViewById(R.id.editTextTextPassword)
 
+        loginBtn.setOnClickListener {
+            if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
+                if (controller.loginUser(emailBox.text.toString(), passwordBox.text.toString())) {
+                    foodController.checkOut(controller.getUserID())
+                    Toast.makeText(context, "User Login Successful", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "User Login Failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
         registerSwitch.setOnClickListener {
             if (registerSwitch.isChecked) {
                 loginBtn.text = "Register"

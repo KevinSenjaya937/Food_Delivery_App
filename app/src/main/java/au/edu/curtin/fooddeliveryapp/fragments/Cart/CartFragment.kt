@@ -51,13 +51,26 @@ class CartFragment(private val foodController: FoodController,
         checkOutBtn.setOnClickListener {
 
             if (userController.userLoggedIn()) {
-                foodController.checkOut(userController.getUserID())
-                Toast.makeText(context, "Order Made", Toast.LENGTH_SHORT).show()
+                if (foodController.checkFoodOrders() && !foodController.checkFoodOrderEmpty()) {
+                    foodController.checkOut(userController.getUserID())
+                    Toast.makeText(context, "Order Made", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Please check order amounts.", Toast.LENGTH_SHORT).show()
+                }
             }
             else {
-                parentFragmentManager.beginTransaction().apply {
-                    replace(R.id.scrollingFragment, LoginFragment(userController, foodController))
-                    commit()
+                if (foodController.checkFoodOrders() && !foodController.checkFoodOrderEmpty()) {
+                    parentFragmentManager.beginTransaction().apply {
+                        replace(R.id.scrollingFragment, LoginFragment(userController, foodController))
+                        commit()
+                    }
+                } else {
+                    if (foodController.checkFoodOrderEmpty()) {
+                        Toast.makeText(context, "Food order cannot be empty", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "Please check order amounts.", Toast.LENGTH_SHORT).show()
+                    }
+
                 }
             }
         }
@@ -69,8 +82,13 @@ class CartFragment(private val foodController: FoodController,
     }
 
     override fun onRemoveItemClick(position: Int) {
-        foodOrderList[position].amount--
-        adapter.notifyItemChanged(position)
+        val foodOrder = foodOrderList[position]
+
+        if (foodOrder.amount != 1) {
+            foodOrder.amount--
+            adapter.notifyItemChanged(position)
+        }
+
     }
 
     override fun onRemoveItemFromCartClick(position: Int) {

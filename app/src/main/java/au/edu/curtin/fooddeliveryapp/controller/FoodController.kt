@@ -74,6 +74,20 @@ class FoodController(database: DBHelper) {
         return foodOrderList
     }
 
+    fun checkFoodOrders(): Boolean {
+        var allValid = true
+
+        for (fo in foodOrderList) {
+            if (fo.amount < 1) {
+                allValid = false
+            }
+        }
+        return allValid
+    }
+
+    fun checkFoodOrderEmpty(): Boolean {
+        return foodOrderList.isEmpty()
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkOut(userID: Int) {

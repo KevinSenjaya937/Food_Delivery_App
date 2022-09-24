@@ -31,11 +31,11 @@ class HomeAdapter(private val data: ArrayList<Food>): RecyclerView.Adapter<HomeA
     inner class DealViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private lateinit var food: Food
 
-        var foodImage: de.hdodenhof.circleimageview.CircleImageView
+        private var foodImage: de.hdodenhof.circleimageview.CircleImageView
         var restaurantName: TextView
-        var foodName: TextView
-        var foodPrice: TextView
-        var foodDesc: TextView
+        private var foodName: TextView
+        private var foodPrice: TextView
+        private var foodDesc: TextView
 
         init {
             foodImage = itemView.findViewById(R.id.foodImageView)

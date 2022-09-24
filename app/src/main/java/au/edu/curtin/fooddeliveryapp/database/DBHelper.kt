@@ -18,7 +18,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val RESTAURANT_TABLE = "restaurants"
         const val FOOD_TABLE = "food"
         const val FOOD_ORDER_TABLE = "foodOrders"
-        const val ORDERS_TABLE = "orders"
         const val USERS_TABLE = "users"
 
         // Restaurant Table
@@ -138,62 +137,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
     // Checked
     @SuppressLint("Range")
-    fun getRestaurantNames(): ArrayList<String> {
-        val restaurantNames: ArrayList<String> = ArrayList()
-        val selectQuery = "SELECT * FROM $RESTAURANT_TABLE"
-        val db = this.readableDatabase
-
-        val cursor: Cursor?
-
-        try {
-            cursor = db.rawQuery(selectQuery, null)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            db.execSQL(selectQuery)
-            return ArrayList()
-        }
-
-        var restaurantName: String
-
-        if (cursor.moveToFirst()) {
-            do {
-                restaurantName = cursor.getString(cursor.getColumnIndex(RESTAURANT_NAME))
-
-                restaurantNames.add(restaurantName)
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        return restaurantNames
-    }
-
-    // Checked
-    @SuppressLint("Range")
-    fun getRestaurantID(name: String): Int {
-
-        val selectQuery = "SELECT * FROM $RESTAURANT_TABLE"
-        val db = this.readableDatabase
-
-        val cursor: Cursor? = db.rawQuery(selectQuery, null)
-
-        var restaurantName: String
-        var restaurantID : Int = -1
-
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                do {
-                    restaurantName = cursor.getString(cursor.getColumnIndex(RESTAURANT_NAME))
-                    if (restaurantName == name) {
-                        restaurantID = cursor.getInt(cursor.getColumnIndex(RESTAURANT_ID))
-                    }
-                } while (cursor.moveToNext())
-            }
-        }
-        cursor?.close()
-        return restaurantID
-    }
-
-    // Checked
-    @SuppressLint("Range")
     fun getAllRestaurants() : ArrayList<Restaurant> {
 
         val restaurantList: ArrayList<Restaurant> = ArrayList()
@@ -273,24 +216,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             } while (cursor.moveToNext())
         }
         return foodList
-    }
-
-    @SuppressLint("Range")
-    fun getLastFoodId(): Int {
-        val selectQuery = "SELECT * FROM $FOOD_TABLE"
-        val db = this.readableDatabase
-
-        val cursor: Cursor? = db.rawQuery(selectQuery, null)
-
-        var foodID : Int = -1
-
-        if (cursor != null) {
-            if (cursor.moveToLast()) {
-                foodID = cursor.getInt(cursor.getColumnIndex(FOOD_ID))
-            }
-        }
-        cursor?.close()
-        return foodID
     }
 
     // Checked
@@ -407,7 +332,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         val cursor: Cursor? = db.rawQuery(selectQuery, null)
 
-        var userID : Int = 0
+        var userID = 0
 
         if (cursor != null) {
             if (cursor.moveToLast()) {

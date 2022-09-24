@@ -19,6 +19,28 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+
+    <TextView
+        android:id="@+id/totalPriceHelperText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Price:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/checkOutButton"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/totalPriceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        app:layout_constraintBottom_toTopOf="@id/checkOutButton"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintLeft_toRightOf="@id/totalPriceHelperText"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <Button
         android:id="@+id/checkOutButton"
         android:text="@string/check_out"

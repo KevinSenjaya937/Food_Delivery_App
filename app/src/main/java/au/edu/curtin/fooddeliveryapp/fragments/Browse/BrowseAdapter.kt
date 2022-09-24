@@ -37,10 +37,10 @@ class BrowseAdapter (private val data : ArrayList<Restaurant>,
     inner class RestaurantViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         private lateinit var restaurant: Restaurant
-        var logoImage: ImageView
+        private var logoImage: ImageView
         var restaurantName: TextView
-        var foodType: TextView
-        var location: TextView
+        private var foodType: TextView
+        private var location: TextView
 
         init {
             logoImage = itemView.findViewById(R.id.logoImageView)

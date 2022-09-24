@@ -1,25 +1,18 @@
 package au.edu.curtin.fooddeliveryapp.controller
 
+import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Food
 import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
-import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 import au.edu.curtin.fooddeliveryapp.database.DBHelper
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
-import kotlin.math.log
 import kotlin.random.Random
-import kotlin.random.Random.Default.nextInt
 
 class FoodController(database: DBHelper) {
 
@@ -27,7 +20,6 @@ class FoodController(database: DBHelper) {
     private var foodHashMap: HashMap<Int, ArrayList<Food>> = HashMap()
     private var foodOrderList = ArrayList<FoodOrder>()
     private var db = database
-    private var loaded = false
 
 
     fun load(data: InputStreamReader) {
@@ -41,16 +33,16 @@ class FoodController(database: DBHelper) {
         }
     }
 
-    fun getList(): ArrayList<Food> {
+    private fun getList(): ArrayList<Food> {
         return db.getAllFood()
     }
 
-    fun initializeHashmap() {
+    private fun initializeHashmap() {
         foodHashMap.clear()
         val restaurants = db.getAllRestaurants()
 
         for (restaurant in restaurants) {
-            foodHashMap[restaurant.id] = ArrayList<Food>()
+            foodHashMap[restaurant.id] = ArrayList()
         }
 
         for (food in foodList) {
@@ -89,6 +81,7 @@ class FoodController(database: DBHelper) {
         return foodOrderList.isEmpty()
     }
 
+    @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkOut(userID: Int) {
         val simpleDatetime = SimpleDateFormat("EEE, MMM d, h:mm a")
@@ -121,6 +114,18 @@ class FoodController(database: DBHelper) {
         return dailyDeals
     }
 
+    fun getTotalOrderPrice(): String {
+        var totalPrice = 0
+
+        for (order in foodOrderList) {
+            totalPrice += order.totalPrice
+        }
+        return "$$totalPrice.00"
+    }
+
+    fun logoutUser() {
+        this.foodOrderList.clear()
+    }
 
 
 
@@ -138,9 +143,10 @@ class FoodController(database: DBHelper) {
 
 
 
-    fun readFoodData(inputStreamReader: InputStreamReader): List<Food> {
+
+    private fun readFoodData(inputStreamReader: InputStreamReader): List<Food> {
         val reader = BufferedReader(inputStreamReader)
-        val header = reader.readLine()
+        reader.readLine()
         return reader.lineSequence()
             .filter { it.isNotBlank() }
             .map {
@@ -149,7 +155,7 @@ class FoodController(database: DBHelper) {
             }.toList()
     }
 
-    fun initializeDB(inputStreamReader: InputStreamReader){
+    private fun initializeDB(inputStreamReader: InputStreamReader){
         this.foodList = readFoodData(inputStreamReader)
         initializeHashmap()
 

@@ -12,6 +12,7 @@ import au.edu.curtin.fooddeliveryapp.fragments.Account.AccountFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Browse.BrowseFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Cart.CartFragment
 import au.edu.curtin.fooddeliveryapp.fragments.Home.HomeFragment
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.InputStreamReader
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         val foodData = InputStreamReader(assets.open("food.csv"))
         val homeFragment = HomeFragment(foodController)
         val cartFragment = CartFragment(foodController, userController)
-        val acctFragment = AccountFragment(userController)
+        val acctFragment = AccountFragment(userController, foodController)
         val restaurantsFragment = BrowseFragment(restaurantController, foodController)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
@@ -85,5 +86,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.scrollingFragment, Fragment)
             commit()
+    }
+
+    fun clickHomeBtn() {
+        val homeBtn = findViewById<BottomNavigationItemView>(R.id.nav_home)
+        homeBtn.performClick()
     }
 }

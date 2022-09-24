@@ -10,51 +10,74 @@
         android:id="@+id/dailyDealHelper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:gravity="left"
         android:text="Daily Deals"
         android:textSize="24sp"
-        app:layout_constraintHorizontal_bias="0.054"
+        android:textStyle="bold"
+        android:gravity="left"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dailyDealRecycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         tools:listitem="@layout/deal_item"
         app:layout_constraintTop_toBottomOf="@id/dailyDealHelper"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
-
     </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/moreDealsHelper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More Deals"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/dailyDealRecycler"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moreDealsRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="100dp"
-        android:paddingBottom="200dp"
         tools:listitem="@layout/deal_item"
-        app:layout_constraintTop_toBottomOf="@id/dailyDealRecycler"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/moreDealsHelper"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="gone">
+        app:layout_constraintRight_toRightOf="parent">
     </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/evenMoreDealsHelper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Even More Deals"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/moreDealsRecycler"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/evenMoreDealsRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="100dp"
-        android:paddingBottom="200dp"
         tools:listitem="@layout/deal_item"
-        app:layout_constraintTop_toBottomOf="@id/moreDealsRecycler"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/evenMoreDealsHelper"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="gone">
+        app:layout_constraintRight_toRightOf="parent">
     </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

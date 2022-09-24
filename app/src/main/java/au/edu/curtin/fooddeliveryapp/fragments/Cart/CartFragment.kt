@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,7 @@ class CartFragment(private val foodController: FoodController,
     private lateinit var recyclerView: RecyclerView
     private lateinit var foodOrderList: ArrayList<FoodOrder>
     private lateinit var checkOutBtn: Button
+    private lateinit var totalPriceText: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +39,9 @@ class CartFragment(private val foodController: FoodController,
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        totalPriceText = view.findViewById(R.id.totalPriceText)
+        totalPriceText.text = foodController.getTotalOrderPrice()
 
         this.foodOrderList = foodController.getFoodOrders()
         val layoutManager = LinearLayoutManager(context)

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.R
@@ -38,14 +37,14 @@ class FoodListAdapter (private val data: ArrayList<Food>,
     inner class FoodViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         private lateinit var food: Food
-        var foodImage: de.hdodenhof.circleimageview.CircleImageView
-        var foodName: TextView
+        private var foodImage: de.hdodenhof.circleimageview.CircleImageView
+        private var foodName: TextView
         var price: TextView
-        var description: TextView
-        var addButton: ImageButton
-        var amountText: TextView
-        var removeBtn: ImageButton
-        var addToOrderBtn: ImageButton
+        private var description: TextView
+        private var addButton: ImageButton
+        private var amountText: TextView
+        private var removeBtn: ImageButton
+        private var addToOrderBtn: ImageButton
 
 
         init {
@@ -82,7 +81,7 @@ class FoodListAdapter (private val data: ArrayList<Food>,
 
         override fun onClick(view: View?) {
             val position: Int = absoluteAdapterPosition
-            var amount = amountText.text.toString().toInt()
+            val amount = amountText.text.toString().toInt()
 
             if(view != null) {
                 when (view.id) {

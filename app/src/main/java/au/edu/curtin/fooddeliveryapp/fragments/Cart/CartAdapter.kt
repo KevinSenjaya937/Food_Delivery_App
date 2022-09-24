@@ -1,9 +1,9 @@
 package au.edu.curtin.fooddeliveryapp.fragments.Cart
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class CartAdapter (private val data: ArrayList<FoodOrder>,
+class CartAdapter (private val data: List<FoodOrder>,
                    private val listener: OnItemClickListener
                    ): RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
@@ -36,15 +36,16 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
     inner class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         private lateinit var foodOrder: FoodOrder
-        var foodImage: de.hdodenhof.circleimageview.CircleImageView
+        private var foodImage: de.hdodenhof.circleimageview.CircleImageView
         var restaurantName: TextView
-        var foodName: TextView
-        var totalPrice: TextView
-        var amountText: TextView
-        var dateTimeText: TextView
-        var addButton: ImageButton
-        var removeButton: ImageButton
-        var removeFromCartButton: ImageButton
+        private var foodName: TextView
+        private var totalPrice: TextView
+        private var amountText: TextView
+        private var amountTextTop: TextView
+        private var dateTimeText: TextView
+        private var addButton: ImageButton
+        private var removeButton: ImageButton
+        private var removeFromCartButton: ImageButton
 
         init {
             foodImage = itemView.findViewById(R.id.foodImageView)
@@ -52,6 +53,7 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
             foodName = itemView.findViewById(R.id.foodNameText)
             totalPrice = itemView.findViewById(R.id.priceText)
             amountText = itemView.findViewById(R.id.amountTextNumber)
+            amountTextTop = itemView.findViewById(R.id.amountText)
             dateTimeText = itemView.findViewById(R.id.dateTimeText)
             addButton = itemView.findViewById(R.id.addBtn)
             removeButton = itemView.findViewById(R.id.removeBtn)
@@ -80,6 +82,7 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(foodOrder: FoodOrder) {
 
             val requestOptions = RequestOptions()
@@ -96,7 +99,7 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
 
             restaurantName.text = foodOrder.restaurantName
             foodName.text = foodOrder.foodName
-            totalPrice.text = "$${total}.00"
+            totalPrice.text = "Price: $${total}.00"
             amountText.text = foodOrder.amount.toString()
 
             if (foodOrder.userID == 0) {
@@ -104,6 +107,8 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
                 addButton.isVisible = true
                 removeButton.isVisible = true
                 removeFromCartButton.isVisible = true
+                amountTextTop.isVisible = false
+                amountText.isVisible = true
             }
             else {
                 dateTimeText.isVisible = true
@@ -111,6 +116,9 @@ class CartAdapter (private val data: ArrayList<FoodOrder>,
                 addButton.isVisible = false
                 removeButton.isVisible = false
                 removeFromCartButton.isVisible = false
+                amountTextTop.isVisible = true
+                amountTextTop.text = "Amount: ${foodOrder.amount} . "
+                amountText.isVisible = false
             }
         }
 

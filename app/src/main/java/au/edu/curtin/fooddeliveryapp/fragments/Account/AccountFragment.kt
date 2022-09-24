@@ -5,24 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import au.edu.curtin.fooddeliveryapp.MainActivity
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
+import au.edu.curtin.fooddeliveryapp.controller.FoodController
 import au.edu.curtin.fooddeliveryapp.controller.UserController
-import au.edu.curtin.fooddeliveryapp.fragments.Browse.FoodListAdapter
 import au.edu.curtin.fooddeliveryapp.fragments.Cart.CartAdapter
-import au.edu.curtin.fooddeliveryapp.fragments.Cart.CartFragment
-import org.w3c.dom.Text
 
-class AccountFragment(private val userController: UserController
+
+class AccountFragment(private val userController: UserController,
+                      private val foodController: FoodController
                      ) : Fragment(), CartAdapter.OnItemClickListener {
 
     private lateinit var adapter: CartAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var pastFoodOrders: ArrayList<FoodOrder>
+    private lateinit var pastFoodOrders: List<FoodOrder>
     private lateinit var userEmail: TextView
+    private lateinit var logoutBtn: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +42,13 @@ class AccountFragment(private val userController: UserController
 
         this.userEmail = view.findViewById(R.id.userEmail)
         userEmail.text = userController.getUserEmail()
+
+        this.logoutBtn = view.findViewById(R.id.logoutBtn)
+        logoutBtn.setOnClickListener() {
+            userController.logoutUser()
+            foodController.logoutUser()
+            (activity as MainActivity).clickHomeBtn()
+        }
 
         val layoutManager = LinearLayoutManager(context)
 

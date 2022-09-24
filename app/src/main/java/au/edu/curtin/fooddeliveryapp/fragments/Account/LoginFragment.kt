@@ -1,5 +1,6 @@
 package au.edu.curtin.fooddeliveryapp.fragments.Account
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -26,10 +27,6 @@ class LoginFragment(private val controller: UserController,
     private lateinit var helperText: TextView
     private var numOfOrder = 1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +35,7 @@ class LoginFragment(private val controller: UserController,
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,13 +62,6 @@ class LoginFragment(private val controller: UserController,
         }
     }
 
-    fun switchToUserFragment() {
-        parentFragmentManager.beginTransaction().apply {
-            replace(R.id.scrollingFragment, AccountFragment(controller))
-            commit()
-        }
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     fun switchLoginBtnAction(switched: Boolean) {
 
@@ -80,7 +71,7 @@ class LoginFragment(private val controller: UserController,
                 if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
                     if (controller.registerUser(emailBox.text.toString(), passwordBox.text.toString())) {
                         foodController.checkOut(controller.getUserID())
-                        Toast.makeText(context, "User Successfully Registered", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "User Successfully Registered. Order Complete.", Toast.LENGTH_SHORT).show()
                         (activity as MainActivity).badgeSetup(R.id.nav_account, numOfOrder)
                     }
                 }
@@ -91,7 +82,7 @@ class LoginFragment(private val controller: UserController,
                 if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
                     if (controller.loginUser(emailBox.text.toString(), passwordBox.text.toString())) {
                         foodController.checkOut(controller.getUserID())
-                        Toast.makeText(context, "User Login Successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "User Login Successful. Order Complete.", Toast.LENGTH_SHORT).show()
                         (activity as MainActivity).badgeSetup(R.id.nav_account, numOfOrder)
                     } else {
                         Toast.makeText(context, "User Login Failed", Toast.LENGTH_SHORT).show()

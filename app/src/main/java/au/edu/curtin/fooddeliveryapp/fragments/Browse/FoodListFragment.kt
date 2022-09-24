@@ -1,5 +1,6 @@
 package au.edu.curtin.fooddeliveryapp.fragments.Browse
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import au.edu.curtin.fooddeliveryapp.MainActivity
 import au.edu.curtin.fooddeliveryapp.R
 import au.edu.curtin.fooddeliveryapp.classes.Food
-import au.edu.curtin.fooddeliveryapp.classes.FoodOrder
 import au.edu.curtin.fooddeliveryapp.classes.Restaurant
 import au.edu.curtin.fooddeliveryapp.controller.FoodController
-import au.edu.curtin.fooddeliveryapp.fragments.Browse.FoodListAdapter
 
 
 class FoodListFragment(private val controller: FoodController, private val restaurant: Restaurant
@@ -36,6 +35,7 @@ class FoodListFragment(private val controller: FoodController, private val resta
         return inflater.inflate(R.layout.fragment_food, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

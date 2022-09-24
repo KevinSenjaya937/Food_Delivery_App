@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_account -> {
                     setCurrentFragment(acctFragment)
+                    badgeClear(R.id.nav_account)
                 }
             }
             true

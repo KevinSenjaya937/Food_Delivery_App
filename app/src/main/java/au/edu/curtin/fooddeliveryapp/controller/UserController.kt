@@ -51,6 +51,16 @@ class UserController(database: DBHelper) {
         return currentUser.userID
     }
 
+    fun getUserEmail(): String {
+        var email = "No User Logged In"
+
+        if (userLoggedIn) {
+            email = currentUser.email
+        }
+
+        return email
+    }
+
     fun getStatusText(): String {
         return statusText
     }

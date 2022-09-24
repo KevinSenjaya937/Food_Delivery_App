@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import au.edu.curtin.fooddeliveryapp.MainActivity
@@ -22,6 +23,7 @@ class LoginFragment(private val controller: UserController,
     private lateinit var registerSwitch: androidx.appcompat.widget.SwitchCompat
     private lateinit var emailBox: EditText
     private lateinit var passwordBox: EditText
+    private lateinit var helperText: TextView
     private var numOfOrder = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,45 +46,20 @@ class LoginFragment(private val controller: UserController,
         registerSwitch = view.findViewById(R.id.registerLoginSwitch)
         emailBox = view.findViewById(R.id.editTextTextEmailAddress)
         passwordBox = view.findViewById(R.id.editTextTextPassword)
+        helperText = view.findViewById(R.id.loginHelperText)
 
-        loginBtn.setOnClickListener {
-            if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
-                if (controller.loginUser(emailBox.text.toString(), passwordBox.text.toString())) {
-                    foodController.checkOut(controller.getUserID())
-                    Toast.makeText(context, "User Login Successful", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "User Login Failed", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+        switchLoginBtnAction(false)
+
         registerSwitch.setOnClickListener {
             if (registerSwitch.isChecked) {
                 loginBtn.text = "Register"
-                registerSwitch.text = "Register"
+                helperText.text = "Register"
+                switchLoginBtnAction(true)
 
-                loginBtn.setOnClickListener {
-                    if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
-                        if (controller.registerUser(emailBox.text.toString(), passwordBox.text.toString())) {
-                            foodController.checkOut(controller.getUserID())
-                            Toast.makeText(context, "User Successfully Registered", Toast.LENGTH_SHORT).show()
-                            (activity as MainActivity).badgeSetup(R.id.nav_account, numOfOrder)
-                        }
-                    }
-                }
             } else {
                 loginBtn.text = "Login"
-                registerSwitch.text = "Login"
-
-                loginBtn.setOnClickListener {
-                    if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
-                        if (controller.loginUser(emailBox.text.toString(), passwordBox.text.toString())) {
-                            foodController.checkOut(controller.getUserID())
-                            Toast.makeText(context, "User Login Successful", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(context, "User Login Failed", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
+                helperText.text = "Login"
+                switchLoginBtnAction(false)
             }
         }
     }
@@ -91,6 +68,36 @@ class LoginFragment(private val controller: UserController,
         parentFragmentManager.beginTransaction().apply {
             replace(R.id.scrollingFragment, AccountFragment(controller))
             commit()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun switchLoginBtnAction(switched: Boolean) {
+
+        if (switched) {
+            // Register Function - True
+            loginBtn.setOnClickListener {
+                if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
+                    if (controller.registerUser(emailBox.text.toString(), passwordBox.text.toString())) {
+                        foodController.checkOut(controller.getUserID())
+                        Toast.makeText(context, "User Successfully Registered", Toast.LENGTH_SHORT).show()
+                        (activity as MainActivity).badgeSetup(R.id.nav_account, numOfOrder)
+                    }
+                }
+            }
+        } else {
+            // Login Function - False
+            loginBtn.setOnClickListener {
+                if (emailBox.text.isNotEmpty() && passwordBox.text.isNotEmpty()) {
+                    if (controller.loginUser(emailBox.text.toString(), passwordBox.text.toString())) {
+                        foodController.checkOut(controller.getUserID())
+                        Toast.makeText(context, "User Login Successful", Toast.LENGTH_SHORT).show()
+                        (activity as MainActivity).badgeSetup(R.id.nav_account, numOfOrder)
+                    } else {
+                        Toast.makeText(context, "User Login Failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 

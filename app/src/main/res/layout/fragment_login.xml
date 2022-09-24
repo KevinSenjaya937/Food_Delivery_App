@@ -12,11 +12,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:text="Login"
-        app:layout_constraintHorizontal_bias="0.31"
+        android:paddingLeft="6dp"
+
+        app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:switchPadding="20dp" />
+
+    <TextView
+        android:id="@+id/loginHelperText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:text="Login"
+        app:layout_constraintBottom_toTopOf="@id/usernameHelper"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@id/registerLoginSwitch"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/usernameHelper"
